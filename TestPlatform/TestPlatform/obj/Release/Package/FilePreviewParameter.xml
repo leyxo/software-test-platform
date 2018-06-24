@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="www.testplatform.com" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\leyxo\\Desktop\\Visual\ Studio\ Doc\\TestPlatform\\TestPlatform\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\leyxo\\Desktop\\Visual\ Studio\ Doc\\TestPlatform\\TestPlatform\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="webConnectionString-Web.config Connection String" description="" value="Data Source=LEYSMACBOOK;Initial Catalog=STPlatform;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\leyxo\\Desktop\\Visual\ Studio\ Doc\\TestPlatform\\TestPlatform\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='webConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

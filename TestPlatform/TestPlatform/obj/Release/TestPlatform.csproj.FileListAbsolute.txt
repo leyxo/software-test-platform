@@ -1,0 +1,6 @@
+C:\Users\leyxo\Desktop\Visual Studio Doc\TestPlatform\TestPlatform\bin\TestPlatform.dll.config
+C:\Users\leyxo\Desktop\Visual Studio Doc\TestPlatform\TestPlatform\bin\TestPlatform.dll
+C:\Users\leyxo\Desktop\Visual Studio Doc\TestPlatform\TestPlatform\bin\TestPlatform.pdb
+C:\Users\leyxo\Desktop\Visual Studio Doc\TestPlatform\TestPlatform\obj\Release\TestPlatform.csprojResolveAssemblyReference.cache
+C:\Users\leyxo\Desktop\Visual Studio Doc\TestPlatform\TestPlatform\obj\Release\TestPlatform.dll
+C:\Users\leyxo\Desktop\Visual Studio Doc\TestPlatform\TestPlatform\obj\Release\TestPlatform.pdb
