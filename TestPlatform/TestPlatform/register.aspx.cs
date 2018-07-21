@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace TestPlatform
 {
@@ -12,37 +9,82 @@ namespace TestPlatform
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.alert_userexisted.Visible = false;
+            // 已登录跳转回用户主界面
+            if (Session["current_user_id"] != null && Session["current_user_id"].ToString() != "" && Session["current_user_id"].ToString() != "0")
+            {
+                Response.Redirect("/platform/platform_home.aspx");
+            }
+
+            alert.Attributes["class"] = "alert alert-danger";
+            alert.Visible = false;
         }
 
         protected void Button_Regist_Click(object sender, EventArgs e)
         {
-            string name = this.username.Value;
-            string password = md5Helper.MD5Encrypt(this.password.Value);
-            string email = this.email.Value;
-            string phone = this.phone.Value;
-            int department = Convert.ToInt32(this.DropDownList_department.SelectedValue);
-            int role = Convert.ToInt32(this.DropDownList_role.SelectedValue);
-            int reg_status = 1; // 待审核
+            Users users = new Users();
+            users.name = this.username.Value;
+            users.password = md5Helper.MD5Encrypt(this.password.Value);
+            string password_confirm = md5Helper.MD5Encrypt(this.password_confirm.Value);
+            users.email = this.email.Value;
+            users.phone = this.phone.Value;
+            users.reg_datetime = DateTime.Now;
+            users.department = Convert.ToInt32(this.DropDownList_department.SelectedValue);
+            users.role = Convert.ToInt32(this.DropDownList_role.SelectedValue);
+            users.reg_status = 1; // 待审核
 
-            string sql = "insert into users (name, password, email, phone, reg_datetime, department, role, reg_status) values ('" + name + "','" + password + "','" + email + "','" + phone + "','" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "'," + department + "," + role + "," + reg_status + ")";
+            string sql = new StringBuilder("insert into users")
+                .Append(" (name, password, email, phone, reg_datetime, department, role, reg_status)")
+                .Append(" values (@name, @password, @email, @phone, @reg_datetime, @department, @role, @reg_status)").ToString();
 
-            if (-1 != sqlHelper.ExecuteNonQuery(sql, null))
+            SqlParameter[] parameters = {
+                    new SqlParameter("@name", users.name),
+                    new SqlParameter("@password", users.password),
+                    new SqlParameter("@email", users.email),
+                    new SqlParameter("@phone", users.phone),
+                    new SqlParameter("@reg_datetime", users.reg_datetime.ToString("yyyy/MM/dd HH:mm:ss")),
+                    new SqlParameter("@department", users.department),
+                    new SqlParameter("@role", users.role),
+                    new SqlParameter("@reg_status", users.reg_status),
+            };
+
+            // 邮箱格式正则表达式
+            string emailStr = @"([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,5})+";
+            string phoneStr = @"(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}";
+
+            if (users.name.Length < 6 || users.name.Length > 16)
+            {
+                alert_text.InnerText = "用户名长度为6~16位";
+            }
+            else if (users.password.Length < 6 || users.password.Length > 16)
+            {
+                alert_text.InnerText = "密码长度为6~16位";
+            }
+            else if (users.password != password_confirm)
+            {
+                alert_text.InnerText = "密码不一致";
+            }
+            else if (users.email != "" && !(System.Text.RegularExpressions.Regex.IsMatch(users.email, emailStr)))
+            {
+                alert_text.InnerText = "请输入正确的邮箱格式";
+            }
+            else if (users.phone != "" && !(System.Text.RegularExpressions.Regex.IsMatch(users.phone, phoneStr)))
+            {
+                alert_text.InnerText = "请输入正确的手机号格式";
+            }
+            else if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
             {
                 // 操作成功
-                Response.Write("<script>alert('注册申请已提交，等待管理员审核！')</script>");
-                Response.Redirect("~/login.aspx");
+                alert_text.InnerText = "注册申请已提交，等待管理员审核！ 3秒钟后跳转到登录页";
+                alert.Attributes["class"] = "alert alert-success";
+                //Response.Redirect("~/login.aspx");
+                Response.Write("<meta http-equiv='Refresh' content='3; url=login.aspx' /> ");
             }
             else
             {
-                this.alert_userexisted.Visible = true;
+                alert_text.InnerText = "用户名已存在";
             }
+            alert.Visible = true;
 
-        }
-
-        protected void Button_Back_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/index.aspx");
         }
 
 
@@ -56,5 +98,6 @@ namespace TestPlatform
             else
                 return false;
         }
+
     }
 }

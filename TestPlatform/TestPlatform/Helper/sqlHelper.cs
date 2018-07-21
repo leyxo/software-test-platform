@@ -71,8 +71,8 @@ namespace TestPlatform
             }
             catch (Exception e)
             {
+                //throw new Exception(e.Message); // 上线时需要注释
                 return -1;
-                //throw new Exception(e.Message);
             }
             finally
             {

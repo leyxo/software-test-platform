@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -20,7 +23,7 @@ namespace TestPlatform.Widget
         // asp用法：<%= getUsername() %>
         public string getUsername()
         {
-            string html = Session["current_user"].ToString();
+            string html = Session["current_user_name"].ToString();
             //string html =  Request.Form["TextBox_Username"];
             return html;
         }

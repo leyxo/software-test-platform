@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TopBar.ascx.cs" Inherits="TestPlatform.Widget.TopBar" %>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="../Scripts/jquery-2.2.4.js"></script>
+<script src="../Scripts/bootstrap.min.js"></script>
 <%--jquery要在bootstrap js之前引用！--%>
 
 <nav class="navbar navbar-fixed-top navbar-default">
@@ -17,26 +17,23 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar_item">
             <ul class="nav navbar-nav navbar-right">
-                <li id="Login"><a href="../login.aspx">登录</a></li>
-                <li id="Register"><a href="../register.aspx">注册</a></li>
+                <li id="Login"><a href="/login.aspx">登录</a></li>
+                <li id="Register"><a href="/register.aspx">注册</a></li>
             </ul>
-        <%--</div>
-        <div class="collapse navbar-collapse" id="navbar_item">--%>
-            <ul class="nav navbar-nav">
-                <li id="IndexPage"><a href="#">首页</a></li>
-                <li id="About"><a href="#">关于</a></li>
+
+            <%--<ul class="nav navbar-nav">
+                <li id="About"><a href="/about.aspx">关于</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多 <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">使用帮助</a></li>
-                        <li><a href="#">没有</a></li>
-                        <li><a href="#">更多</a></li>
+                        <li><a href="/help.aspx">使用帮助</a></li>
+                        <li><a href="#">意见反馈</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">了</a></li>
+                        <li><a href="#">加入我们</a></li>
                     </ul>
                 </li>
-            </ul>
+            </ul>--%>
         </div>
     </div>
 </nav>

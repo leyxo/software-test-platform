@@ -12,10 +12,13 @@ namespace TestPlatform
 {
     public partial class Index : System.Web.UI.Page
     {
-        static string strConn = ConfigurationManager.ConnectionStrings["webConnectionString"].ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // 已登录跳转回用户主界面
+            if (Session["current_user_id"] != null && Session["current_user_id"].ToString() != "" && Session["current_user_id"].ToString() != "0")
+            {
+                Response.Redirect("/platform/platform_home.aspx");
+            }
         }
 
         // 解决 控件GirdView必须放在具有 runat=server 的窗体标记内 
@@ -23,5 +26,6 @@ namespace TestPlatform
         {
             //base.VerifyRenderingInServerForm(control);
         }
+
     }
 }

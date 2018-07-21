@@ -17,7 +17,7 @@ namespace TestPlatform
         {
             context.Session.Clear();    //从会话状态集合中移除所有的键和值
             context.Session.Abandon();  //取消当前会话
-            context.Response.Redirect("~/index.aspx");   //跳转登录页
+            context.Response.Redirect("~/logout.aspx");   //跳转登录页
         }
     }
 }
