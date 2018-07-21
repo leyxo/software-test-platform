@@ -41,7 +41,7 @@
                         <br />
                         <br />
                         测试人员：<asp:Label ID="user" Font-Bold="true" runat="server" Text=""></asp:Label>
-                        &nbsp;&nbsp;&nbsp;测试提交时间：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
+                        &nbsp;&nbsp;&nbsp;版本提交时间：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
                         <br />
                     </div>
                 </div>
@@ -82,9 +82,14 @@
                 </SelectParameters>
             </asp:SqlDataSource>
 
+            <br />
+            <h4><strong>总结</strong></h4>
+            <asp:Label ID="Label_summery" runat="server" Text=""></asp:Label>
 
             <br />
-            <h5><strong>以前版本待解决问题</strong></h5>
+            <br />
+            <br />
+            <h4><strong>以前版本待解决问题</strong></h4>
             <%--SQL条件：(版本号 < 当前版本 and (未通过 or 有修改意见))--%>
             <asp:GridView ID="GridView2" Class="table table-striped table-bordered table-condensed" Font-Size="Small" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource_test_case_previous" DataKeyNames="ID">
                 <Columns>

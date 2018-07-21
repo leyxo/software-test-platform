@@ -18,5 +18,7 @@ namespace TestPlatform.Model
         public DateTime start_time;     // 开始日期
         public DateTime end_time;       // 截止日期
         public DateTime creation_date;  // 提交时间
+        public int is_finish;           // 是否已提交
+        public string summary;          // 总结
     }
 }

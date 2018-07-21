@@ -52,6 +52,18 @@ namespace TestPlatform
                     alert.Attributes["class"] = "alert alert-danger";
                     alert_text.InnerText = "用户审核未通过";
                 }
+                else if (ds.Tables[0].Rows[0]["reg_status"].ToString() == "3")
+                {
+                    // 未通过审核
+                    alert.Attributes["class"] = "alert alert-danger";
+                    alert_text.InnerText = "用户已离职";
+                }
+                else if (ds.Tables[0].Rows[0]["reg_status"].ToString() == "5")
+                {
+                    // 未通过审核
+                    alert.Attributes["class"] = "alert alert-danger";
+                    alert_text.InnerText = "用户已被注销";
+                }
                 else
                 {
                     // Session
@@ -68,6 +80,9 @@ namespace TestPlatform
                     Session["editing_test_id"] = "";
                     Session["current_test_id"] = "";
                     Session["current_test_version"] = "";
+
+                    Session["current_basedata_test_id"] = "";
+                    Session["current_basedata_test_version"] = "";
 
                     // 已通过审核，登录成功
                     this.password.Value = password;

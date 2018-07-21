@@ -27,7 +27,7 @@ namespace TestPlatform.platform
             }
 
             // 初始化表中数据sql语句，选出当前项目组的项目
-            test_all.SelectCommand = "SELECT test.id AS ID, test.name AS 项目名称, users.name AS 创建者, test.describe AS 简介, test.creation_date AS 项目创建日期 FROM test INNER JOIN users ON users.id = test.creation_user_id AND test.creation_user_id = users.id WHERE (test.creation_department_id = '" + Session["current_user_department_id"] + "')";
+            //test_all.SelectCommand = "SELECT test.id AS ID, test.name AS 项目名称, users.name AS 创建者, test.describe AS 简介, test.creation_date AS 项目创建日期 FROM test INNER JOIN users ON users.id = test.creation_user_id AND test.creation_user_id = users.id WHERE (test.creation_department_id = '" + Session["current_user_department_id"] + "')";
             Title_All_Test_Count.InnerHtml = GridView1.Rows.Count.ToString();
         }
 

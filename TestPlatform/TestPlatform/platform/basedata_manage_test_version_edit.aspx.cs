@@ -31,7 +31,7 @@ namespace TestPlatform.platform
 
             // 获取测试系统名称、版本号
             string sql = new StringBuilder("select name from test where").Append(" id = @id").ToString();
-            SqlParameter[] parameters = { new SqlParameter("@id", Session["current_test_id"]), };
+            SqlParameter[] parameters = { new SqlParameter("@id", Session["current_basedata_test_id"]), };
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
             string test_name = ds.Tables[0].Rows[0]["name"].ToString();
             Title_Test_Name.InnerHtml = test_name;

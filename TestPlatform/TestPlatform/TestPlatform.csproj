@@ -104,6 +104,7 @@
     <Content Include="platform\basedata_manage_test.aspx" />
     <Content Include="platform\basedata_manage_test_add.aspx" />
     <Content Include="platform\basedata_manage_test_edit.aspx" />
+    <Content Include="platform\basedata_manage_test_edit_users.aspx" />
     <Content Include="platform\basedata_manage_test_version.aspx" />
     <Content Include="platform\basedata_manage_test_version_add.aspx" />
     <Content Include="platform\basedata_manage_test_version_edit.aspx" />
@@ -500,6 +501,7 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Properties\PublishProfiles\DeployConfig.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -668,6 +670,7 @@
     <Compile Include="Model\MenuModel.cs" />
     <Compile Include="Model\Reg_status.cs" />
     <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\Test_users.cs" />
     <Compile Include="Model\Role_model.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="Model\Test_case.cs" />
@@ -708,6 +711,13 @@
     </Compile>
     <Compile Include="platform\basedata_manage_test_edit.aspx.designer.cs">
       <DependentUpon>basedata_manage_test_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="platform\basedata_manage_test_edit_users.aspx.cs">
+      <DependentUpon>basedata_manage_test_edit_users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="platform\basedata_manage_test_edit_users.aspx.designer.cs">
+      <DependentUpon>basedata_manage_test_edit_users.aspx</DependentUpon>
     </Compile>
     <Compile Include="platform\basedata_manage_test_version.aspx.cs">
       <DependentUpon>basedata_manage_test_version.aspx</DependentUpon>

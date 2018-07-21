@@ -48,7 +48,7 @@ namespace TestPlatform.platform
             }
             else
             {
-                Response.Redirect("/platform/test.aspx");
+                Response.Redirect("/platform/basedata_manage_test.aspx");
             }
         }
 

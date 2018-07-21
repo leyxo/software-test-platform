@@ -130,6 +130,15 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.Label creation_date;
         
         /// <summary>
+        /// Button_Submit 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button_Submit;
+        
+        /// <summary>
         /// Button_Generate_Report 控件。
         /// </summary>
         /// <remarks>
@@ -184,6 +193,24 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.GridView GridView2;
         
         /// <summary>
+        /// textfield_summary 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea textfield_summary;
+        
+        /// <summary>
+        /// Button_Save 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Save;
+        
+        /// <summary>
         /// SqlDataSource_test_case 控件。
         /// </summary>
         /// <remarks>
@@ -218,6 +245,15 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert_text;
+        
+        /// <summary>
+        /// Button1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// Footer 控件。

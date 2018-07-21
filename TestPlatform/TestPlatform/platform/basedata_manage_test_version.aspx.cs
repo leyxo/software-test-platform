@@ -39,9 +39,9 @@ namespace TestPlatform.platform
 
             alert.Visible = false;
 
-            if (Session["current_test_id"] != null && Session["current_test_id"].ToString() == "")
+            if (Session["current_basedata_test_id"] != null && Session["current_basedata_test_id"].ToString() == "")
             {
-                // 第一次加载时，初始化Session["current_test_id"]和Session["current_test_version"]
+                // 第一次加载时，初始化Session["current_basedata_test_id"]
                 // 获取第一个项目id
                 string sql = new StringBuilder("select id from test where")
                     .Append(" creation_department_id = @creation_department_id").ToString();
@@ -51,12 +51,12 @@ namespace TestPlatform.platform
                 DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-                    Session["current_test_id"] = ds.Tables[0].Rows[0]["id"].ToString();
+                    Session["current_basedata_test_id"] = ds.Tables[0].Rows[0]["id"].ToString();
 
                 }
                 else
                 {
-                    Session["current_test_id"] = "0";
+                    Session["current_basedata_test_id"] = "0";
                 }
             }
         }
@@ -68,9 +68,9 @@ namespace TestPlatform.platform
         /// <param name="e"></param>
         protected void DropDownList_test_DataBound(object sender, EventArgs e)
         {
-            if (Session["current_test_id"].ToString() != "" && Session["current_test_id"].ToString() != "0")
+            if (Session["current_basedata_test_id"].ToString() != "" && Session["current_basedata_test_id"].ToString() != "0")
             {
-                DropDownList_test.Items.FindByValue(Session["current_test_id"].ToString()).Selected = true;
+                DropDownList_test.Items.FindByValue(Session["current_basedata_test_id"].ToString()).Selected = true;
             }
         }
 
@@ -82,7 +82,22 @@ namespace TestPlatform.platform
         protected void DropDownList_test_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 初始化 Session["current_test_version"]
-            Session["current_test_id"] = DropDownList_test.SelectedValue;
+            Session["current_basedata_test_id"] = DropDownList_test.SelectedValue;
+            // 获取第一个版本id
+            string sql = new StringBuilder("select id from test_version where")
+                .Append(" test_id = @test_id").ToString();
+            SqlParameter[] parameters = {
+                    new SqlParameter("@test_id", Session["current_basedata_test_id"]),
+                    };
+            DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                Session["current_basedata_test_version"] = ds.Tables[0].Rows[0]["id"].ToString();
+            }
+            else
+            {
+                Session["current_basedata_test_version"] = "0";
+            }
         }
 
         protected void Button_Add_Version_Click(object sender, EventArgs e)
@@ -113,6 +128,7 @@ namespace TestPlatform.platform
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             Session["current_test_version"] = "";
+            Session["current_basedata_test_version"] = "";
             string sql = "delete from test_version where id = '" + GridView1.DataKeys[e.RowIndex]["id"].ToString() + "'";
             SqlDataSource_test_version.DeleteCommand = sql;
         }

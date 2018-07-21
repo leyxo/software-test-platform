@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="webConnectionString-Web.config Connection String" description="webConnectionString 由应用程序在 web.config 中用来访问数据库的连接字符串。" defaultValue="Data Source=LEYSMACBOOK;Initial Catalog=STPlatform;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\leyxo\\Desktop\\Visual\ Studio\ Doc\\TestPlatform\\TestPlatform\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='webConnectionString']/@connectionString" />
-  </parameter>
-</parameters>

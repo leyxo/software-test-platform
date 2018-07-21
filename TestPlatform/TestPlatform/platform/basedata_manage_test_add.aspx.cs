@@ -55,11 +55,11 @@ namespace TestPlatform.platform
                 alert.Attributes["class"] = "alert alert-success";
 
                 // Session["current_test_id"]设为当前添加项
-                string sql0 = new StringBuilder("select * from test where")
-                   .Append(" name = @name").ToString();
-                SqlParameter[] parameters0 = { new SqlParameter("@name", name) };
-                DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
-                Session["current_test_id"] = ds0.Tables[0].Rows[0]["id"].ToString();
+                //string sql0 = new StringBuilder("select * from test where")
+                //   .Append(" name = @name").ToString();
+                //SqlParameter[] parameters0 = { new SqlParameter("@name", name) };
+                //DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
+                //Session["current_test_id"] = ds0.Tables[0].Rows[0]["id"].ToString();
 
                 Response.Redirect("/platform/basedata_manage_test.aspx");
             }

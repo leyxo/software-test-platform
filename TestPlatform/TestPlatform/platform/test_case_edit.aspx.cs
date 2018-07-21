@@ -73,11 +73,11 @@ namespace TestPlatform.platform
             string test_name = ds.Tables[0].Rows[0]["name"].ToString();
             Title_Test_Name.InnerHtml = test_name;
 
-            string sql2 = new StringBuilder("select name from test_version where").Append(" id = @id").ToString();
-            SqlParameter[] parameters2 = { new SqlParameter("@id", Session["current_test_version"]), };
-            DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
-            string test_version = ds2.Tables[0].Rows[0]["name"].ToString();
-            Title_Test_version.InnerHtml = test_version;
+            //string sql2 = new StringBuilder("select name from test_version where").Append(" id = @id").ToString();
+            //SqlParameter[] parameters2 = { new SqlParameter("@id", Session["current_test_version"]), };
+            //DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
+            //string test_version = ds2.Tables[0].Rows[0]["name"].ToString();
+            //Title_Test_version.InnerHtml = test_version;
         }
 
         protected void Button_Save_Click(object sender, EventArgs e)

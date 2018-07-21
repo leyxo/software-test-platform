@@ -1,36 +1,42 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="TestPlatform.Index" %>
+<%@ Register Src="~/Widget/TopBar.ascx" TagName="TopBar" TagPrefix="topbar" %>
+<%@ Register Src="~/Widget/Footer.ascx" TagName="Footer" TagPrefix="footer" %>
 
-<!DOCTYPE html>
+<%@ OutputCache Duration="5" VaryByControl="none" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>软件测试平台</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+   
+    <%--css--%>
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="Content/base.css" />
+
+    <%--Bootstrap Table--%>
+    <script src="Content/bootstrap-table/bootstrap-table.js"></script>
+    <link href="Content/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+    <script src="Content/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        登陆
+    <div class="container" runat="server">
+        <%--TopBar--%>
+        <topbar:TopBar ID="TopBar" runat="server" />
+
+        <div class="jumbotron">
+            <h1>欢迎!</h1>
+            <p>欢迎使用软件测试平台，为你的团队工作效率带来提高</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="login.aspx" role="button">马上登录</a> &nbsp;
+                <%--<a class="btn btn-default btn-lg" href="about.aspx" role="button">了解更多</a>--%>
+            </p>
+        </div>
+        <br />
+
+        <%--Footer--%>
+        <footer:Footer ID="Footer" runat="server" />
     </div>
-        用户名<asp:TextBox ID="TextBox_Username" runat="server"></asp:TextBox>
-        <br />
-        密码<asp:TextBox ID="TextBox_Password" runat="server"></asp:TextBox>
-        <br />
-
-        <asp:Button ID="Button_Login" class="btn btn-default" runat="server" OnClick="Button1_Click" Text="登陆" />
-        <p>
-        <asp:repeater runat="server" ID="repeater_user">
-            <ItemTemplate >
-                <asp:TextBox ID="TextBox_UserName" runat="server"  Text='<%#Eval("password") %>'  >
-                </asp:TextBox>
-            </ItemTemplate>
-        </asp:repeater>
-
-        </p>
-    </form>
 </body>
 </html>

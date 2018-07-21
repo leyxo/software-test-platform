@@ -31,7 +31,7 @@ namespace TestPlatform.platform
 
             // 获取测试系统名称、版本号
             string sql = new StringBuilder("select name from test where").Append(" id = @id").ToString();
-            SqlParameter[] parameters = { new SqlParameter("@id", Session["current_test_id"].ToString()), };
+            SqlParameter[] parameters = { new SqlParameter("@id", Session["current_basedata_test_id"].ToString()), };
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
             string test_name = ds.Tables[0].Rows[0]["name"].ToString();
             Title_Test_Name.InnerHtml = test_name;
@@ -56,16 +56,15 @@ namespace TestPlatform.platform
             string number = string.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
 
             string sql = new StringBuilder("insert into test_version")
-                .Append(" (name, test_id, number, start_time, end_time, creation_date)")
-                .Append(" values (@name, @test_id, @number, @start_time, @end_time, @creation_date)").ToString();
+                .Append(" (name, test_id, number, start_time, end_time)")
+                .Append(" values (@name, @test_id, @number, @start_time, @end_time)").ToString();
 
             SqlParameter[] parameters = {
                   new SqlParameter("@name", name),
-                  new SqlParameter("@test_id", Session["current_test_id"]),
+                  new SqlParameter("@test_id", Session["current_basedata_test_id"]),
                   new SqlParameter("@number", number),
                   new SqlParameter("@start_time", start_time.ToString()),
                   new SqlParameter("@end_time", end_time.ToString()),
-                  new SqlParameter("@creation_date", creation_date.ToString()),
             };
 
             if ("" == this.start_time.Value || "" == this.end_time.Value)

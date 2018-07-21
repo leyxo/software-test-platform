@@ -35,6 +35,7 @@ namespace TestPlatform.platform
             {
                 GridView1.Columns[5].Visible = false;
                 GridView1.Columns[6].Visible = false;
+                GridView1.Columns[7].Visible = false;
             }
 
             Title_All_Test_Count.InnerHtml = GridView1.Rows.Count.ToString();
@@ -48,6 +49,13 @@ namespace TestPlatform.platform
                 Session["editing_test_id"] = e.CommandArgument.ToString();
                 Response.Redirect("/platform/basedata_manage_test_edit.aspx");
             }
+
+            // 成员编辑
+            if (e.CommandName == "edit_users")
+            {
+                Session["editing_test_id"] = e.CommandArgument.ToString();
+                Response.Redirect("/platform/basedata_manage_test_edit_users.aspx");
+            }
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -55,6 +63,8 @@ namespace TestPlatform.platform
             // 删除一项后，置当Session["current_test_id"]，Session["current_test_version"]为空
             Session["current_test_id"] = "";
             Session["current_test_version"] = "";
+            Session["current_basedata_test_id"] = "";
+            Session["current_basedata_test_version"] = "";
 
             string sql = "delete from test where id = '" + GridView1.DataKeys[e.RowIndex]["ID"].ToString() + "'";
             test_all.DeleteCommand = sql;

@@ -74,6 +74,11 @@ namespace TestPlatform.platform
                 creation_date.Text = ds.Tables[0].Rows[0]["creation_date"].ToString();
                 start_time.Text = ds.Tables[0].Rows[0]["start_time"].ToString().Split(' ')[0]; ;
                 end_time.Text = ds.Tables[0].Rows[0]["end_time"].ToString().Split(' ')[0];
+                Label_summery.Text = ds.Tables[0].Rows[0]["summary"].ToString();
+                if (Label_summery.Text == "")
+                {
+                    Label_summery.Text = "无";
+                }
                 user.Text = Session["current_user_name"].ToString();
             }
             else
