@@ -58,7 +58,7 @@ namespace TestPlatform.platform
             }
             else
             {
-                alert_text.InnerText = "部门名称已存在";
+                alert_text.InnerText = "机构名称已存在";
                 alert.Visible = true;
             }
         }
@@ -67,7 +67,7 @@ namespace TestPlatform.platform
         {
             string sql = "delete from department where id = 0";
 
-            // 如果当前部门没有人则可以删除
+            // 如果当前机构没有人则可以删除
             string sql0 = new StringBuilder("select * from users where")
                 .Append(" department = @department").ToString();
             SqlParameter[] parameters = { new SqlParameter("@department", GridView1.DataKeys[e.RowIndex]["id"].ToString()) };
@@ -78,7 +78,7 @@ namespace TestPlatform.platform
             }
             else
             {
-                alert_text.InnerText = "该部门包含成员，不能删除";
+                alert_text.InnerText = "该机构包含成员，不能删除";
                 alert.Visible = true;
             }
             SqlDataSource_departmemnt.DeleteCommand = sql;

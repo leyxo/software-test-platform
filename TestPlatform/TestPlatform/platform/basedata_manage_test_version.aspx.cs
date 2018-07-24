@@ -43,16 +43,15 @@ namespace TestPlatform.platform
             {
                 // 第一次加载时，初始化Session["current_basedata_test_id"]
                 // 获取第一个项目id
-                string sql = new StringBuilder("select id from test where")
-                    .Append(" creation_department_id = @creation_department_id").ToString();
+                string sql = new StringBuilder("select test.id from test")
+                    .Append(" INNER JOIN test_users ON test_users.test_id = test.id WHERE test_users.user_id = @user_id and available = 1").ToString();
                 SqlParameter[] parameters = {
-                    new SqlParameter("@creation_department_id", Session["current_user_department_id"]),
+                    new SqlParameter("@user_id", Session["current_user_id"]),
                 };
                 DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     Session["current_basedata_test_id"] = ds.Tables[0].Rows[0]["id"].ToString();
-
                 }
                 else
                 {
@@ -123,6 +122,29 @@ namespace TestPlatform.platform
                 Response.Redirect("/platform/basedata_manage_test_version_edit.aspx");
             }
 
+            // 开始测试选择项目
+            if (e.CommandName == "start")
+            {
+                // 初始化 Session["current_test_version"]
+                Session["current_test_version"] = e.CommandArgument.ToString();
+                // 获取第一个版本id
+                string sql = new StringBuilder("select test_id from test_version where")
+                    .Append(" id = @id").ToString();
+                SqlParameter[] parameters = {
+                    new SqlParameter("@id", Session["current_test_version"]),
+                    };
+                DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    Session["current_test_id"] = ds.Tables[0].Rows[0]["test_id"].ToString();
+                }
+                else
+                {
+                    Session["current_test_id"] = "0";
+                }
+
+                Response.Redirect("/platform/test_case.aspx");
+            }
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)

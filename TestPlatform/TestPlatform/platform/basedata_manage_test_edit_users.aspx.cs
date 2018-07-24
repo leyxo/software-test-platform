@@ -33,6 +33,13 @@ namespace TestPlatform.platform
             {
                 if (!IsPostBack)
                 {
+                    // 获取测试系统名称
+                    string sql0 = new StringBuilder("select name from test where").Append(" id = @id").ToString();
+                    SqlParameter[] parameters0 = { new SqlParameter("@id", Session["editing_test_id"]), };
+                    DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
+                    string test_name = ds0.Tables[0].Rows[0]["name"].ToString();
+                    Title_Test_Name.InnerHtml = test_name;
+
                     // 加载用户分配表信息
                     string sql = "select * from test_users where test_id = '" + Session["editing_test_id"].ToString() + "'";
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
@@ -92,9 +99,6 @@ namespace TestPlatform.platform
                     // 操作成功
                     alert_text.InnerText = "保存成功";
                     alert.Attributes["class"] = "alert alert-success";
-                    
-                    //Session["editing_test_id"] = "";
-                    //Response.Redirect("/platform/basedata_manage_test.aspx");
                 }
                 else
                 {
@@ -102,7 +106,9 @@ namespace TestPlatform.platform
                 }
                 alert.Visible = true;
             }
-            
+
+            Session["editing_test_id"] = "";
+            Response.Redirect("/platform/basedata_manage_test.aspx");
         }
 
         protected void Button_Cancel_Click(object sender, EventArgs e)

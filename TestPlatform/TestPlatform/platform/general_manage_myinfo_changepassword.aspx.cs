@@ -38,9 +38,9 @@ namespace TestPlatform.platform
                 // 旧密码输入正确，开始修改密码
                 string sql_updatePassword = "update users set password = '" + password + "' where id = " + Session["current_user_id"];
 
-                if (this.password.Value.Length < 6 || this.password.Value.Length > 16)
+                if (this.password.Value.Length > 16)
                 {
-                    alert_text.InnerText = "密码长度为6~16位";
+                    alert_text.InnerText = "密码长度不超过16位";
                     alert.Attributes["class"] = "alert alert-danger";
                 }
                 else if (password != password_confirm)

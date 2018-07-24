@@ -27,8 +27,12 @@ namespace TestPlatform.platform
             if (!authHelper.hasAuthority(Convert.ToInt32(Session["current_user_role_id"]), "/platform/system_manage_personnel_edit.aspx"))
             {
                 GridView1.Columns[8].Visible = false;
-                GridView1.Columns[9].Visible = false;
+                GridView2.Columns[8].Visible = false;
+                Button_Add.Visible = false;
             }
+
+            alert.Attributes["class"] = "alert alert-danger";
+            alert.Visible = false;
 
             // 待审核人员角标
             if (0 == GridView0.Rows.Count)
@@ -43,8 +47,8 @@ namespace TestPlatform.platform
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            string sql = "update users set reg_status = '3' where id = '" + GridView1.DataKeys[e.RowIndex]["用户ID"].ToString() + "'";
-            userinfo.DeleteCommand = sql;
+            string sql = "delete from users where id = '" + GridView1.DataKeys[e.RowIndex]["用户ID"].ToString() + "'";
+            userinfo_enabled.DeleteCommand = sql;
         }
 
         protected void GridView0_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -67,7 +71,7 @@ namespace TestPlatform.platform
             if (e.CommandName == "refuse")
             {
                 string sql = new StringBuilder("update users set")
-                .Append(" reg_status = 4")
+                .Append(" reg_status = 3")
                 .Append(" where id = @id").ToString();
 
                 SqlParameter[] parameters = {
@@ -86,7 +90,37 @@ namespace TestPlatform.platform
                 Session["editing_user_id"] = e.CommandArgument.ToString();
                 Response.Redirect("/platform/system_manage_personnel_edit.aspx");
             }
+
+            // 删除选择
+            if (e.CommandName == "del")
+            {
+                string sql = new StringBuilder("delete from users")
+                    .Append(" where id = @id").ToString();
+                SqlParameter[] parameters = {
+                  new SqlParameter("@id", e.CommandArgument.ToString())
+                    };
+
+                if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
+                {
+                    // 操作成功
+                    Response.Redirect("/platform/system_manage_personnel.aspx");
+                }
+                else
+                {
+                    alert_text.InnerText = "此用户有正在参与的项目，不可删除";
+                    alert.Visible = true;
+                }
+            }
         }
 
+        /// <summary>
+        /// 新建用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Button_Add_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/platform/system_manage_personnel_add.aspx");
+        }
     }
 }

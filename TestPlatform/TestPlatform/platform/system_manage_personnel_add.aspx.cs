@@ -1,25 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
-namespace TestPlatform
+namespace TestPlatform.platform
 {
-    public partial class register : System.Web.UI.Page
+    public partial class system_manage_personnel_add : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 已登录跳转回用户主界面
-            if (Session["current_user_id"] != null && Session["current_user_id"].ToString() != "" && Session["current_user_id"].ToString() != "0")
+            // 未登录跳转回登录界面
+            if (Session["current_user_id"] == null)
             {
-                Response.Redirect("/platform/platform_home.aspx");
+                Response.Redirect("/login.aspx");
+            }
+
+            // 没有权限跳转回用户主页
+            if (!authHelper.hasAuthority(Convert.ToInt32(Session["current_user_role_id"]), "/platform/system_manage_personnel_edit.aspx"))
+            {
+                Response.Redirect("/platform/system_manage_personnel.aspx");
             }
 
             alert.Attributes["class"] = "alert alert-danger";
             alert.Visible = false;
         }
 
-        protected void Button_Regist_Click(object sender, EventArgs e)
+        protected void Button_Save_Click(object sender, EventArgs e)
         {
             Users users = new Users();
             users.name = this.username.Value;
@@ -30,7 +41,7 @@ namespace TestPlatform
             users.reg_datetime = DateTime.Now;
             users.department = Convert.ToInt32(this.DropDownList_department.SelectedValue);
             users.role = Convert.ToInt32(this.DropDownList_role.SelectedValue);
-            users.reg_status = 1; // 待审核
+            users.reg_status = 2; // 有效人员
 
             string sql = new StringBuilder("insert into users")
                 .Append(" (name, password, email, phone, reg_datetime, department, role, reg_status)")
@@ -74,19 +85,17 @@ namespace TestPlatform
             else if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
             {
                 // 操作成功
-                alert_text.InnerText = "注册申请已提交，等待管理员审核！ 3秒钟后跳转到登录页";
+                alert_text.InnerText = "已注册";
                 alert.Attributes["class"] = "alert alert-success";
-                //Response.Redirect("~/login.aspx");
-                Response.Write("<meta http-equiv='Refresh' content='3; url=login.aspx' /> ");
+                Response.Redirect("/platform/system_manage_personnel.aspx");
+                //Response.Write("<meta http-equiv='Refresh' content='1; url=login.aspx' /> ");
             }
             else
             {
-                alert_text.InnerText = "用户名已存在";
+                alert_text.InnerText = "注册失败，用户名可能已存在";
             }
             alert.Visible = true;
-
         }
-
 
         // 判断是否已存在用户
         public bool UserNameExist(string name)
@@ -99,5 +108,9 @@ namespace TestPlatform
                 return false;
         }
 
+        protected void Button_Cancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/platform/system_manage_personnel.aspx");
+        }
     }
 }

@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>人员信息编辑 - 人员管理 - 系统管理 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
@@ -41,7 +41,7 @@
                                     <br />
                                     <div class="input-group">
                                         <span class="input-group-addon glyphicon glyphicon-envelope" id="emil_icon" style="position: static"></span>
-                                        <input type="text" runat="server" class="form-control" id="email" placeholder="邮箱" required="required" disabled="disabled" />
+                                        <input type="text" runat="server" class="form-control" id="email" placeholder="邮箱" disabled="disabled" />
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -52,20 +52,20 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="position: static">部门</span>
-                                        <asp:DropDownList ID="DropDownList_department" runat="server" DataSourceID="SqlDataSource_register_department" DataTextField="name" DataValueField="id" Height="34px" Width="128px"></asp:DropDownList>
+                                        <span class="input-group-addon" style="position: static">机构</span>
+                                        <asp:DropDownList ID="DropDownList_department" runat="server" DataSourceID="SqlDataSource_register_department" DataTextField="name" DataValueField="id" Height="34px" Width="160px"></asp:DropDownList>
                                         <asp:SqlDataSource ID="SqlDataSource_register_department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [department]"></asp:SqlDataSource>
                                     </div>
                                     <br />
                                     <div class="input-group">
                                         <span class="input-group-addon" style="position: static">角色</span>
-                                        <asp:DropDownList ID="DropDownList_role" runat="server" DataSourceID="SqlDataSource_register_role" DataTextField="name" DataValueField="id" Height="34px" Width="128px"></asp:DropDownList>
+                                        <asp:DropDownList ID="DropDownList_role" runat="server" DataSourceID="SqlDataSource_register_role" DataTextField="name" DataValueField="id" Height="34px" Width="160px"></asp:DropDownList>
                                         <asp:SqlDataSource ID="SqlDataSource_register_role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [role]"></asp:SqlDataSource>
                                     </div>
                                     <br />
                                     <div class="input-group">
                                         <span class="input-group-addon" style="position: static">状态</span>
-                                        <asp:DropDownList ID="DropDownList_reg_status" runat="server" DataSourceID="SqlDataSource_register_reg_status" DataTextField="name" DataValueField="id" Height="34px" Width="128px"></asp:DropDownList>
+                                        <asp:DropDownList ID="DropDownList_reg_status" runat="server" DataSourceID="SqlDataSource_register_reg_status" DataTextField="name" DataValueField="id" Height="34px" Width="160px"></asp:DropDownList>
                                         <asp:SqlDataSource ID="SqlDataSource_register_reg_status" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [reg_status]"></asp:SqlDataSource>
                                     </div>
                                     <br />

@@ -32,6 +32,7 @@ namespace TestPlatform
             
             if (getCode != checkCode)
             {
+                captcha.Value = "";
                 alert.Attributes["class"] = "alert alert-danger";
                 alert.InnerText = "验证码错误";
             }
@@ -46,23 +47,11 @@ namespace TestPlatform
                     alert.Attributes["class"] = "alert alert-warning";
                     alert_text.InnerText = "用户信息正在审核中";
                 }
-                else if (ds.Tables[0].Rows[0]["reg_status"].ToString() == "4")
-                {
-                    // 未通过审核
-                    alert.Attributes["class"] = "alert alert-danger";
-                    alert_text.InnerText = "用户审核未通过";
-                }
                 else if (ds.Tables[0].Rows[0]["reg_status"].ToString() == "3")
                 {
                     // 未通过审核
                     alert.Attributes["class"] = "alert alert-danger";
-                    alert_text.InnerText = "用户已离职";
-                }
-                else if (ds.Tables[0].Rows[0]["reg_status"].ToString() == "5")
-                {
-                    // 未通过审核
-                    alert.Attributes["class"] = "alert alert-danger";
-                    alert_text.InnerText = "用户已被注销";
+                    alert_text.InnerText = "无效用户";
                 }
                 else
                 {

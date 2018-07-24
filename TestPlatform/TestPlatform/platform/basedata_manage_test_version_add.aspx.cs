@@ -40,39 +40,56 @@ namespace TestPlatform.platform
         protected void Button_Save_Click(object sender, EventArgs e)
         {
             string name = version_name.Value;
-            DateTime start_time = DateTime.Now;
-            DateTime end_time = DateTime.Now;
-            DateTime creation_date = DateTime.Now;
+            string start_time = "";
+            string end_time = "";
+            string creation_date = "";
             if ("" != this.start_time.Value)
             {
-                start_time = Convert.ToDateTime(this.start_time.Value);
+                start_time = Convert.ToDateTime(this.start_time.Value).ToString();
             }
             if ("" != this.end_time.Value)
             {
-                end_time = Convert.ToDateTime(this.end_time.Value);
+                end_time = Convert.ToDateTime(this.end_time.Value).ToString();
+            }
+            if ("" != this.creation_date.Value)
+            {
+                creation_date = Convert.ToDateTime(this.creation_date.Value).ToString();
             }
 
 
             string number = string.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
 
             string sql = new StringBuilder("insert into test_version")
-                .Append(" (name, test_id, number, start_time, end_time)")
-                .Append(" values (@name, @test_id, @number, @start_time, @end_time)").ToString();
+                .Append(" (name, test_id, number, start_time, end_time, creation_date)")
+                .Append(" values (@name, @test_id, @number, @start_time, @end_time, @creation_date)").ToString();
 
             SqlParameter[] parameters = {
                   new SqlParameter("@name", name),
                   new SqlParameter("@test_id", Session["current_basedata_test_id"]),
                   new SqlParameter("@number", number),
-                  new SqlParameter("@start_time", start_time.ToString()),
-                  new SqlParameter("@end_time", end_time.ToString()),
+                  new SqlParameter("@start_time", start_time),
+                  new SqlParameter("@end_time", end_time),
+                  new SqlParameter("@creation_date", creation_date),
             };
 
-            if ("" == this.start_time.Value || "" == this.end_time.Value)
+            // 起止日期允许为空
+            if (start_time == "")
             {
-                alert_text.InnerText = "请填写测试起止日期！";
-                alert.Attributes["class"] = "alert alert-danger";
+                parameters[3].IsNullable = true;
+                parameters[3].Value = DBNull.Value;
             }
-            else if (start_time > end_time)
+            if (end_time == "")
+            {
+                parameters[4].IsNullable = true;
+                parameters[4].Value = DBNull.Value;
+            }
+            if (creation_date == "")
+            {
+                parameters[5].IsNullable = true;
+                parameters[5].Value = DBNull.Value;
+            }
+
+            if ("" != this.start_time.Value && "" != this.end_time.Value && Convert.ToDateTime(start_time) > Convert.ToDateTime(end_time))
             {
                 alert_text.InnerText = "起始日期不能大于结束日期！";
                 alert.Attributes["class"] = "alert alert-danger";

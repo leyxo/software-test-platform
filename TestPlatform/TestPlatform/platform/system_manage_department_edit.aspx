@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>部门信息编辑 - 部门管理 - 系统管理 - 软件测试平台</title>
+    <title>机构信息编辑 - 机构管理 - 系统管理 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
@@ -24,18 +24,18 @@
         </div>
         <div class="col-md-10">
             <div class="panel panel-default">
-                <div class="panel-heading"><b id="B1" runat="server">系统管理 > 部门管理 > 部门信息编辑</b></div>
+                <div class="panel-heading"><b id="B1" runat="server">系统管理 > 机构管理 > 机构信息编辑</b></div>
                 <div class="panel-body" id="Div1" runat="server">
 
                     <%--主体内容--%>
 
                     <div style="max-width: 400px;">
-                        <h4><strong>部门信息编辑</strong></h4>
+                        <h4><strong>机构信息编辑</strong></h4>
                         <br />
                         <form id="form1" role="form" runat="server">
                             <div class="input-group">
-                                <span class="input-group-addon" style="position: static">部门名称</span>
-                                <input type="text" runat="server" class="form-control" id="department_name" style="font-weight:bold;" placeholder="部门名称" required="required" />
+                                <span class="input-group-addon" style="position: static">机构名称</span>
+                                <input type="text" runat="server" class="form-control" id="department_name" style="font-weight:bold;" placeholder="机构名称" required="required" />
                             </div>
                             <br />
 

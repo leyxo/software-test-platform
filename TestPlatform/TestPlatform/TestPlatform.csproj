@@ -117,8 +117,8 @@
     <Content Include="platform\system_manage_department.aspx" />
     <Content Include="platform\system_manage_department_edit.aspx" />
     <Content Include="platform\system_manage_personnel.aspx" />
+    <Content Include="platform\system_manage_personnel_add.aspx" />
     <Content Include="platform\system_manage_personnel_edit.aspx" />
-    <Content Include="platform\test.aspx" />
     <Content Include="platform\test_case.aspx" />
     <Content Include="platform\test_case_add.aspx" />
     <Content Include="platform\test_case_describe.aspx" />
@@ -803,19 +803,19 @@
     <Compile Include="platform\system_manage_personnel.aspx.designer.cs">
       <DependentUpon>system_manage_personnel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="platform\system_manage_personnel_add.aspx.cs">
+      <DependentUpon>system_manage_personnel_add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="platform\system_manage_personnel_add.aspx.designer.cs">
+      <DependentUpon>system_manage_personnel_add.aspx</DependentUpon>
+    </Compile>
     <Compile Include="platform\system_manage_personnel_edit.aspx.cs">
       <DependentUpon>system_manage_personnel_edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="platform\system_manage_personnel_edit.aspx.designer.cs">
       <DependentUpon>system_manage_personnel_edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="platform\test.aspx.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="platform\test.aspx.designer.cs">
-      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="platform\test_case.aspx.cs">
       <DependentUpon>test_case.aspx</DependentUpon>

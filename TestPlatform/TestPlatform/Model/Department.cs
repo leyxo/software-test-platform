@@ -6,11 +6,11 @@ using System.Web;
 namespace TestPlatform
 {
     /// <summary>
-    /// 部门表
+    /// 机构表
     /// </summary>
     public class Department
     {
-        public int id;         // 部门ID (自增主键)
-        public string name;    // 部门名称
+        public int id;         // 机构ID (自增主键)
+        public string name;    // 机构名称
     }
 }

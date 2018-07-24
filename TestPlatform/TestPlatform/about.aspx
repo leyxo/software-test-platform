@@ -7,14 +7,13 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>关于 - 软件测试平台</title>
 
     <%--Style Sheet--%>
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="Content/base.css" />
-
 
 </head>
 <body>

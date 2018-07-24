@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>权限管理 - 系统管理 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
@@ -43,17 +43,17 @@
                                             <asp:CheckBox ID="CheckBox1" runat="server" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="项目负责人">
+                                    <asp:TemplateField HeaderText="测试组长">
                                         <ItemTemplate>
                                             <asp:CheckBox ID="CheckBox2" runat="server" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="项目组成员">
+                                    <asp:TemplateField HeaderText="测试人员">
                                         <ItemTemplate>
                                             <asp:CheckBox ID="CheckBox3" runat="server" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="开发人员">
+                                    <asp:TemplateField HeaderText="开发者">
                                         <ItemTemplate>
                                             <asp:CheckBox ID="CheckBox4" runat="server" />
                                         </ItemTemplate>

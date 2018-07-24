@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>项目编辑 - 系统名称维护 - 基础数据管理 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     <link rel="stylesheet" href="../Content/bootstrap-datepicker3.css"/>
 
@@ -48,6 +48,14 @@
                                 <textarea rows="5" runat="server" class="form-control" style="resize:none" id="test_describe" placeholder="备注 (选填)"></textarea>
                             </div>
                             <br />
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="test_available" runat="server" type="checkbox" value="">
+                                        是否有效
+                                    </label>
+                                </div>
+                            </div>
                             <div id="alert" runat="server" class="alert alert-success alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <span id="alert_text" runat="server"><strong>保存成功！</strong></span>

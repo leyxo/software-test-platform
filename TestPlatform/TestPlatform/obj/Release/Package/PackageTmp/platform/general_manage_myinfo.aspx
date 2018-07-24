@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>个人信息 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
@@ -54,8 +54,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="position: static">部门</span>
-                                        <asp:DropDownList ID="DropDownList_department" runat="server" DataSourceID="SqlDataSource_register_department" DataTextField="name" DataValueField="id" Height="34px" Width="128px" Enabled="False" ToolTip="不可修改部门" BackColor="#F8F8F8"></asp:DropDownList>
+                                        <span class="input-group-addon" style="position: static">机构</span>
+                                        <asp:DropDownList ID="DropDownList_department" runat="server" DataSourceID="SqlDataSource_register_department" DataTextField="name" DataValueField="id" Height="34px" Width="128px" Enabled="False" ToolTip="不可修改机构" BackColor="#F8F8F8"></asp:DropDownList>
                                         <asp:SqlDataSource ID="SqlDataSource_register_department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [department]"></asp:SqlDataSource>
                                     </div>
                                     <br />

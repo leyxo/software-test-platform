@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>测试系统维护 - 基础数据管理 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
@@ -33,13 +33,13 @@
                     <form id="form1" runat="server">
                         <h4><strong><span id="Title_All_Test" runat="server">所有测试系统</span> (<span id="Title_All_Test_Count" runat="server"></span>个)</strong>
                             <span style="float: right">
-                                    <table>
-                                        <tr>
-                                            <th>
-                                                <asp:Button ID="Button_Add_Test" class="btn btn-primary" runat="server" Text="新建项目" OnClick="Button_Add_Test_Click" />
-                                        </tr>
-                                        </table>
-                                </span>
+                                <table>
+                                    <tr>
+                                        <th>
+                                            <asp:Button ID="Button_Add_Test" class="btn btn-primary" runat="server" Text="新建项目" OnClick="Button_Add_Test_Click" />
+                                    </tr>
+                                </table>
+                            </span>
                         </h4>
                         <br />
                         <asp:GridView ID="GridView1" Class="table table-striped table-hover table-bordered table-condensed" Font-Size="Small" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataSourceID="test_all" DataKeyNames="ID" OnRowCommand="GridView1_RowCommand" OnRowDeleting="GridView1_RowDeleting">
@@ -49,9 +49,16 @@
                                 <asp:BoundField DataField="简介" HeaderText="简介" SortExpression="简介" />
                                 <asp:BoundField DataField="项目创建日期" HeaderText="项目创建日期" SortExpression="项目创建日期" DataFormatString="{0:d}" />
                                 <asp:BoundField DataField="创建者" HeaderText="创建者" SortExpression="创建者" />
-                                <asp:CommandField ShowDeleteButton="True" >
-                                <ItemStyle ForeColor="#CC0000" Width="40px" />
-                                </asp:CommandField>
+                                <asp:BoundField DataField="状态" HeaderText="状态" SortExpression="状态" />
+                                <asp:BoundField DataField="扣分" HeaderText="扣分" SortExpression="扣分" />
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" Text="删除" CommandName="Delete" CausesValidation="False" ID="LinkButton1" OnClientClick="javascript:return confirm('确定删除此测试系统？');"></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <ControlStyle ForeColor="#CC0000"></ControlStyle>
+                                    <ItemStyle Width="40px"></ItemStyle>
+                                </asp:TemplateField>
+
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="LinkButton_edit" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="edit">编辑</asp:LinkButton>
@@ -69,8 +76,7 @@
                                 还没有项目？开始一个<a href="basedata_manage_test_add.aspx">新项目</a>
                             </EmptyDataTemplate>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="test_all" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test.id AS ID, test.name AS 项目名称, users.name AS 创建者, test.describe AS 简介, test.creation_date AS 项目创建日期 FROM test INNER JOIN users ON users.id = test.creation_user_id AND test.creation_user_id = users.id
-WHERE (test.creation_department_id = @current_user_department_id)">
+                        <asp:SqlDataSource ID="test_all" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test.id AS ID, test.name AS 项目名称, users.name AS 创建者, test.describe AS 简介, test.creation_date AS 项目创建日期, replace(replace(available, '0', '无效'), '1', '有效') AS 状态, test.total_value AS 扣分 FROM test INNER JOIN users ON users.id = test.creation_user_id AND test.creation_user_id = users.id">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="current_user_department_id" SessionField="current_user_department_id" />
                             </SelectParameters>

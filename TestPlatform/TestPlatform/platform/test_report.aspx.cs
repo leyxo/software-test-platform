@@ -56,9 +56,6 @@ namespace TestPlatform.platform
                     title.Text += ds2.Tables[0].Rows[0]["name"].ToString() + " - 系统测试报告";
                 }
 
-                // 报告生成时间
-                generate_time.Text = DateTime.Now.ToString();
-
                 // 加载当前版本信息
                 setVersionInfo();
             }
@@ -86,8 +83,8 @@ namespace TestPlatform.platform
                 name.Text = "";
                 version.Text = "";
                 creation_date.Text = "";
-                start_time.Text = "";
-                end_time.Text = "";
+                start_time.Text = "无";
+                end_time.Text = "无";
                 user.Text = "";
             }
         }

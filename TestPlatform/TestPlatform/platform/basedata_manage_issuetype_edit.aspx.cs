@@ -44,6 +44,7 @@ namespace TestPlatform.platform
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
                     issue_name.Value = ds.Tables[0].Rows[0]["name"].ToString();
                     issue_describe.Value = ds.Tables[0].Rows[0]["describe"].ToString();
+                    issue_point.Value = ds.Tables[0].Rows[0]["point"].ToString();
                 }
             }
             else
@@ -56,16 +57,19 @@ namespace TestPlatform.platform
         {
             string name = issue_name.Value;
             string describe = issue_describe.Value;
+            string point = issue_point.Value;
 
             string sql = new StringBuilder("update test_issue_type set")
                 .Append(" name = @name,")
-                .Append(" describe = @describe")
+                .Append(" describe = @describe,")
+                .Append(" point = @point")
                 .Append(" where id = @id").ToString();
 
 
             SqlParameter[] parameters = {
                   new SqlParameter("@name", name),
                   new SqlParameter("@describe", describe),
+                  new SqlParameter("@point", point),
                   new SqlParameter("@id", Session["editing_issuetype_id"].ToString())
             };
 

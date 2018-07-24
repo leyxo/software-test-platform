@@ -55,9 +55,9 @@ namespace TestPlatform
                 alert_text.InnerText = "验证码错误";
                 alert.Attributes["class"] = "alert alert-danger";
             }
-            else if (this.password.Value.Length < 6 || this.password.Value.Length > 16)
+            else if (this.password.Value.Length > 16)
             {
-                alert_text.InnerText = "密码长度为6~16位";
+                alert_text.InnerText = "密码长度不超过16位";
                 alert.Attributes["class"] = "alert alert-danger";
             }
             else if (users.password != password_confirm)
@@ -95,15 +95,19 @@ namespace TestPlatform
                 int num = rd.Next(100000, 1000000);
                 ForgotInfo.code = num.ToString();
                 ForgotInfo.email = ds.Tables[0].Rows[0][0].ToString();
-
-                try
+                if (ForgotInfo.email == "")
+                {
+                    alert_text.InnerText = "用户未填写邮箱";
+                    alert.Attributes["class"] = "alert alert-danger";
+                }
+                else try
                 {
                     sendEmail(ForgotInfo.email);
 
                     // 在新线程中处理60s计数操作
                     //Thread thread_code_process = new Thread(new ThreadStart(codeProcess));
                     //thread_code_process.Start();
-                    Button_SendEmail.Text = "重新发送";
+                    Button_SendEmail.Text = "已发送";
                     Button_SendEmail.Attributes["disabled"] = "disabled";
                     Button_SendEmail.Attributes["OnClick"] = "return false;";
 

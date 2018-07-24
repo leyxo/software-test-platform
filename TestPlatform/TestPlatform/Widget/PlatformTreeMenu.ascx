@@ -13,7 +13,7 @@
             </a>
             <ul id="system_manage" class="nav nav-list collapse secondmenu" style="height: 0px;">
                 <li runat="server" id="system_manage_personnel"><a href="../platform/system_manage_personnel.aspx"><i class="glyphicon glyphicon-user"></i> 人员管理&nbsp; <span id="badge_personnel" style="color:white" runat="server" class="badge"></span></a></li>
-                <li runat="server" id="system_manage_department"><a href="../platform/system_manage_department.aspx"><i class="glyphicon glyphicon glyphicon-tags"></i> 部门管理</a></li>
+                <li runat="server" id="system_manage_department"><a href="../platform/system_manage_department.aspx"><i class="glyphicon glyphicon glyphicon-tags"></i> 机构管理</a></li>
                 <li runat="server" id="system_manage_authority"><a href="../platform/system_manage_authority.aspx"><i class="glyphicon glyphicon-eye-open"></i> 权限管理</a></li>
             </ul>
         </li>
@@ -22,9 +22,8 @@
                 <i class="glyphicon glyphicon glyphicon-inbox"></i> 基础数据管理<span class="pull-right glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul id="basedata_manage" class="nav nav-list collapse secondmenu" style="height: 0px;">
-                <li runat="server" id="basedata_manage_issuetype"><a href="../platform/basedata_manage_issuetype.aspx"><i class="glyphicon glyphicon glyphicon-tags"></i> 错误类型定义</a></li>
+                <li runat="server" id="basedata_manage_issuetype"><a href="../platform/basedata_manage_issuetype.aspx"><i class="glyphicon glyphicon glyphicon-tags"></i> 缺陷类型定义</a></li>
                 <li runat="server" id="basedata_manage_test"><a href="../platform/basedata_manage_test.aspx"><i class="glyphicon glyphicon glyphicon-font"></i> 测试系统维护</a></li>
-                <li runat="server" id="basedata_manage_test_version"><a href="../platform/basedata_manage_test_version.aspx"><i class="glyphicon glyphicon glyphicon-object-align-left"></i> 测试版本维护</a></li>
             </ul>
         </li>
         <li runat="server" id="test_manage_menu">
@@ -32,10 +31,9 @@
                 <i class="glyphicon glyphicon glyphicon-inbox"></i> 测试管理<span class="pull-right glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul id="test_manage" class="nav nav-list collapse secondmenu" style="height: 0px;">
-                <li runat="server" id="test"><a href="../platform/test.aspx"><i class="glyphicon glyphicon-th-list"></i> 测试系统</a></li>
-                <li runat="server" id="test_case"><a href="../platform/test_case.aspx"><i class="glyphicon glyphicon glyphicon-check"></i> 测试记录</a></li>
-                <%--<li runat="server" id="test_report"><a href="../platform/test_report.aspx"><i class="glyphicon glyphicon glyphicon-book"></i> 测试报告</a></li>--%>
-                <li runat="server" id="test_members"><a href="../platform/test_members.aspx"><i class="glyphicon glyphicon glyphicon-user"></i> 部门成员</a></li>
+                <li runat="server" id="basedata_manage_test_version"><a href="../platform/basedata_manage_test_version.aspx"><i class="glyphicon glyphicon glyphicon-object-align-left"></i> 测试版本</a></li>
+                <%--<li runat="server" id="test_case"><a href="../platform/test_case.aspx"><i class="glyphicon glyphicon glyphicon-check"></i> 测试项目</a></li>--%>
+                <li runat="server" id="test_members"><a href="../platform/test_members.aspx"><i class="glyphicon glyphicon-pencil"></i> 测试报告</a></li>
             </ul>
         </li>
     </ul>
@@ -44,7 +42,7 @@
 <script>
     // 判断菜单展开情况
     var path = location.pathname;
-    if (-1 != path.indexOf("platform/basedata")) {
+    if (-1 != path.indexOf("platform/basedata_manage_issue") || -1 != path.indexOf("platform/basedata_manage_test.aspx") || -1 != path.indexOf("platform/basedata_manage_test_add") || -1 != path.indexOf("platform/basedata_manage_test_edit")) {
         $('#basedata_manage').collapse({
             toggle: true,
         });
@@ -57,6 +55,13 @@
     }
     if (-1 != path.indexOf("platform/system")) {
         $('#system_manage').collapse({
+            toggle: true,
+        });
+    }
+
+    // 测试版本被修改到测试管理下，相当糟烂的代码 - -，待重构
+    if (-1 != path.indexOf("platform/basedata_manage_test_version")) {
+        $('#test_manage').collapse({
             toggle: true,
         });
     }

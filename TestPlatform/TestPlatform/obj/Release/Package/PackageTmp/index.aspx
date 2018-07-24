@@ -6,12 +6,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>软件测试平台</title>
    
     <%--css--%>
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="Content/base.css" />
 
     <%--Bootstrap Table--%>
@@ -27,10 +27,10 @@
 
         <div class="jumbotron">
             <h1>欢迎!</h1>
-            <p>欢迎使用软件测试平台，为你的团队工作效率带来提高</p>
+            <p>欢迎使用软件测试平台</p>
             <p>
                 <a class="btn btn-primary btn-lg" href="login.aspx" role="button">马上登录</a> &nbsp;
-                <%--<a class="btn btn-default btn-lg" href="about.aspx" role="button">了解更多</a>--%>
+                <%--<a class="btn btn-default btn-lg" href="help.aspx" role="button">使用帮助</a>--%>
             </p>
         </div>
         <br />

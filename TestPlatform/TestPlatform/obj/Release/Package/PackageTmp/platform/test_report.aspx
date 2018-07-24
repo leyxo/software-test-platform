@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title id="title" runat="server">系统测试报告</title>
 
     <%-- css --%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="../Content/base.css" />
     
 
@@ -35,13 +35,10 @@
                         <br />
                     </div>
                     <div class="col-md-6">
-                        报告生成时间：<asp:Label ID="generate_time" Font-Bold="true" runat="server" Text=""></asp:Label>
-                        <%--版本编号：<asp:Label ID="version_number" Font-Bold="true" runat="server" Text=""></asp:Label>--%>
-                        <%--测试状态：<asp:Label ID="status" Font-Bold="true" runat="server" Text=""></asp:Label>--%>
+                        版本提交时间：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
                         <br />
                         <br />
                         测试人员：<asp:Label ID="user" Font-Bold="true" runat="server" Text=""></asp:Label>
-                        &nbsp;&nbsp;&nbsp;测试提交时间：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
                         <br />
                     </div>
                 </div>
@@ -73,7 +70,7 @@
                     <asp:BoundField DataField="创建时间" HeaderText="创建时间" SortExpression="创建时间" DataFormatString="{0:d}" Visible="False" />
                 </Columns>
                 <EmptyDataTemplate>
-                    测试记录为空
+                    测试项目为空
                 </EmptyDataTemplate>
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource_test_case" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test_case.id AS ID, test_case.name AS 项目, test_case.precondition AS 前置条件, test_case.process AS 测试过程及结果, test_issue_type.name AS 类型, test_case.times AS 次数, test_case.suggestion AS 改进建议, test_case.describe AS 开发描述, pass.name AS 结论, users.name AS 记录者, test_case.creation_date AS 创建时间 FROM test_case INNER JOIN pass ON pass.id = test_case.pass INNER JOIN users ON users.id = test_case.creation_user_id INNER JOIN test_issue_type ON test_case.type = test_issue_type.id WHERE (test_case.version_id = @version_id)">
@@ -82,7 +79,6 @@
                 </SelectParameters>
             </asp:SqlDataSource>
 
-            <br />
             <h4><strong>总结</strong></h4>
             <asp:Label ID="Label_summery" runat="server" Text=""></asp:Label>
 

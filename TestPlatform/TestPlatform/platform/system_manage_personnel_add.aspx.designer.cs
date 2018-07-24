@@ -10,7 +10,7 @@
 namespace TestPlatform.platform {
     
     
-    public partial class basedata_manage_issuetype {
+    public partial class system_manage_personnel_add {
         
         /// <summary>
         /// TopBar 控件。
@@ -58,67 +58,85 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Table_Add 控件。
+        /// username 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table_Add;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText username;
         
         /// <summary>
-        /// input_add 控件。
+        /// password 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText input_add;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password;
         
         /// <summary>
-        /// input_point 控件。
+        /// password_confirm 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText input_point;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password_confirm;
         
         /// <summary>
-        /// input_describe 控件。
+        /// email 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText input_describe;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText email;
         
         /// <summary>
-        /// Button_Add 控件。
+        /// phone 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_Add;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText phone;
         
         /// <summary>
-        /// GridView1 控件。
+        /// DropDownList_department 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_department;
         
         /// <summary>
-        /// SqlDataSource_departmemnt 控件。
+        /// SqlDataSource_register_department 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_departmemnt;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_register_department;
+        
+        /// <summary>
+        /// DropDownList_role 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_role;
+        
+        /// <summary>
+        /// SqlDataSource_register_role 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_register_role;
         
         /// <summary>
         /// alert 控件。
@@ -137,6 +155,24 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert_text;
+        
+        /// <summary>
+        /// Button_Save 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Save;
+        
+        /// <summary>
+        /// Button_Cancel 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Cancel;
         
         /// <summary>
         /// Footer 控件。

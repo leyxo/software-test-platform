@@ -44,6 +44,15 @@ namespace TestPlatform.platform
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
                     test_name.Value = ds.Tables[0].Rows[0]["name"].ToString();
                     test_describe.Value = ds.Tables[0].Rows[0]["describe"].ToString();
+                    string available = ds.Tables[0].Rows[0]["available"].ToString();
+                    if ("1" == available)
+                    {
+                        test_available.Checked = true;
+                    }
+                    else if ("0" == available)
+                    {
+                        test_available.Checked = false;
+                    }
                 }
             }
             else
@@ -56,14 +65,24 @@ namespace TestPlatform.platform
         {
             string name = this.test_name.Value;
             string describe = this.test_describe.Value;
+            string available = "";
+            if (test_available.Checked)
+            {
+                available = "1";
+            }
+            else
+            {
+                available = "0";
+            }
 
             string sql = new StringBuilder("update test set")
-                .Append(" name = @name, describe = @describe")
+                .Append(" name = @name, describe = @describe, available = @available")
                 .Append(" where id = @id").ToString();
 
             SqlParameter[] parameters = {
                     new SqlParameter("@name", name),
                     new SqlParameter("@describe", describe),
+                    new SqlParameter("@available", available),
                     new SqlParameter("@id", Session["editing_test_id"]),
             };
 
@@ -74,6 +93,7 @@ namespace TestPlatform.platform
                 alert_text.InnerText = "保存成功";
                 alert.Attributes["class"] = "alert alert-success";
                 Session["editing_test_id"] = "";
+                Session["current_basedata_test_id"] = "";
                 Response.Redirect("/platform/basedata_manage_test.aspx");
             }
             else

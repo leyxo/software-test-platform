@@ -67,22 +67,31 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Title_Department_Name;
         
         /// <summary>
-        /// DropDownList_test 控件。
+        /// Button_Back 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList_test;
+        protected global::System.Web.UI.WebControls.Button Button_Back;
         
         /// <summary>
-        /// DropDownList_test_version 控件。
+        /// label_test 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList_test_version;
+        protected global::System.Web.UI.WebControls.Label label_test;
+        
+        /// <summary>
+        /// label_test_version 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label label_test_version;
         
         /// <summary>
         /// start_time 控件。
@@ -136,7 +145,16 @@ namespace TestPlatform.platform {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button_Submit;
+        protected global::System.Web.UI.WebControls.Button Button_Submit;
+        
+        /// <summary>
+        /// Button_Finish 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Finish;
         
         /// <summary>
         /// Button_Generate_Report 控件。
@@ -155,24 +173,6 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_Add_Case;
-        
-        /// <summary>
-        /// test 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource test;
-        
-        /// <summary>
-        /// test_version 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource test_version;
         
         /// <summary>
         /// GridView1 控件。
@@ -245,15 +245,6 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert_text;
-        
-        /// <summary>
-        /// Button1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// Footer 控件。

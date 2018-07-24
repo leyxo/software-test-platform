@@ -50,8 +50,18 @@ namespace TestPlatform.platform
 
                     DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
                     version_name.Value = ds2.Tables[0].Rows[0]["name"].ToString();
-                    start_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["start_time"].ToString()).ToShortDateString().ToString();
-                    end_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["end_time"].ToString()).ToShortDateString().ToString();
+                    if (ds2.Tables[0].Rows[0]["start_time"].ToString() != "")
+                    {
+                        start_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["start_time"].ToString()).ToShortDateString().ToString();
+                    }
+                    if (ds2.Tables[0].Rows[0]["end_time"].ToString() != "")
+                    {
+                        end_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["end_time"].ToString()).ToShortDateString().ToString();
+                    }
+                    if (ds2.Tables[0].Rows[0]["creation_date"].ToString() != "")
+                    {
+                        creation_date.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["creation_date"].ToString()).ToShortDateString().ToString();
+                    }
                 }
             }
             else
@@ -63,26 +73,55 @@ namespace TestPlatform.platform
         protected void Button_Save_Click(object sender, EventArgs e)
         {
             string name = this.version_name.Value;
-            DateTime start_time = Convert.ToDateTime(this.start_time.Value);
-            DateTime end_time = Convert.ToDateTime(this.end_time.Value);
+            string start_time = "";
+            string end_time = "";
+            string creation_date = "";
+            if ("" != this.start_time.Value)
+            {
+                start_time = Convert.ToDateTime(this.start_time.Value).ToString();
+            }
+            if ("" != this.end_time.Value)
+            {
+                end_time = Convert.ToDateTime(this.end_time.Value).ToString();
+            }
+            if ("" != this.creation_date.Value)
+            {
+                creation_date = Convert.ToDateTime(this.creation_date.Value).ToString();
+            }
 
             string sql = new StringBuilder("update test_version set")
-                .Append(" name = @name, start_time = @start_time, end_time = @end_time")
+                .Append(" name = @name, start_time = @start_time, end_time = @end_time, creation_date = @creation_date")
                 .Append(" where id = @id").ToString();
 
             SqlParameter[] parameters = {
                     new SqlParameter("@name", name),
-                    new SqlParameter("@start_time", start_time.ToString()),
-                    new SqlParameter("@end_time", end_time.ToString()),
+                    new SqlParameter("@start_time", start_time),
+                    new SqlParameter("@end_time", end_time),
+                    new SqlParameter("@creation_date", creation_date),
                     new SqlParameter("@id", Session["editing_test_version_id"]),
             };
 
+            // 起止日期允许为空
+            if (start_time == "")
+            {
+                parameters[1].IsNullable = true;
+                parameters[1].Value = DBNull.Value;
+            }
+            if (end_time == "")
+            {
+                parameters[2].IsNullable = true;
+                parameters[2].Value = DBNull.Value;
+            }
+            if (creation_date == "")
+            {
+                parameters[3].IsNullable = true;
+                parameters[3].Value = DBNull.Value;
+            }
 
-            if (start_time > end_time)
+            if ("" != this.start_time.Value && "" != this.end_time.Value && Convert.ToDateTime(start_time) > Convert.ToDateTime(end_time))
             {
                 alert_text.InnerText = "起始日期不能大于结束日期！";
                 alert.Attributes["class"] = "alert alert-danger";
-                alert.Visible = true;
             }
             else if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
             {

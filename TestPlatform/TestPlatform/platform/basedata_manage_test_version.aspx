@@ -5,12 +5,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>测试版本维护 - 基础数据管理 - 软件测试平台</title>
+    <title>测试版本 - 测试管理 - 软件测试平台</title>
 
     <%-- css --%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="../Content/base.css" />
     
 
@@ -26,11 +26,11 @@
         </div>
         <div class="col-md-10">
             <div class="panel panel-default">
-                <div class="panel-heading"><b id="B1" runat="server">基础数据管理 > 测试版本维护</b></div>
+                <div class="panel-heading"><b id="B1" runat="server">测试管理 > 测试版本</b></div>
                 <div class="panel-body" id="Div1" runat="server">
 
                     <form id="form1" runat="server">
-                        <h4><strong><span id="Title_Department_Name" runat="server">版本记录</span></strong></h4>
+                        <h4><strong><span id="Title_Department_Name" runat="server">测试版本</span></strong></h4>
                         <%--<br />--%>
                         <span style="float: left">
                             测试系统：<asp:DropDownList ID="DropDownList_test" runat="server" DataSourceID="test" DataTextField="name" DataValueField="id" Height="24px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList_test_SelectedIndexChanged" OnDataBound="DropDownList_test_DataBound"></asp:DropDownList>
@@ -38,10 +38,11 @@
                         </span>
                         <br />
                         <br />
-                        <asp:SqlDataSource ID="test" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT [id], [name] FROM [test] WHERE ([creation_department_id] = @creation_department_id)">
+                        <asp:SqlDataSource ID="test" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test.id AS id, name FROM test INNER JOIN test_users ON test_users.test_id = test.id WHERE test_users.user_id = @user_id and available = 1">
                             <SelectParameters>
-                                <asp:SessionParameter DefaultValue="0" Name="creation_department_id" SessionField="current_user_department_id" Type="Int32" />
+                                <asp:SessionParameter SessionField="current_user_id" Name="user_id"></asp:SessionParameter>
                             </SelectParameters>
+
                         </asp:SqlDataSource>
 
                         <asp:GridView ID="GridView1" Class="table table-striped table-hover table-bordered table-condensed" Font-Size="Small" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataSourceID="SqlDataSource_test_version" DataKeyNames="id" OnRowCommand="GridView1_RowCommand" OnRowDeleting="GridView1_RowDeleting">
@@ -52,20 +53,35 @@
                                 <asp:BoundField DataField="start_time" DataFormatString="{0:d}" HeaderText="起始日期" SortExpression="start_time" />
                                 <asp:BoundField DataField="end_time" DataFormatString="{0:d}" HeaderText="截止日期" SortExpression="end_time" />
                                 <asp:BoundField DataField="creation_date" DataFormatString="{0:d}" HeaderText="提交日期" SortExpression="creation_date" />
-                                <asp:CommandField ShowDeleteButton="True">
-                                <ControlStyle ForeColor="#CC0000" />
-                                </asp:CommandField>
+                                <asp:BoundField DataField="is_finish" HeaderText="状态" SortExpression="is_finish" />
+                                <asp:BoundField DataField="total_value" HeaderText="扣分" SortExpression="total_value" />
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" Text="删除" CommandName="Delete" CausesValidation="False" ID="LinkButton1" OnClientClick="javascript:return confirm('确定删除该版本？');"></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <ControlStyle ForeColor="#CC0000"></ControlStyle>
+                                    <ItemStyle Width="40px"></ItemStyle>
+                                </asp:TemplateField>
+
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="LinkButton_edit" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="edit">编辑</asp:LinkButton>
                                     </ItemTemplate>
+                                    <ItemStyle Width="40px"></ItemStyle>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton_Start" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="start">开始测试</asp:LinkButton>
+                                    </ItemTemplate>
+                                    <ItemStyle Width="80px"></ItemStyle>
                                 </asp:TemplateField>
                             </Columns>
                             <EmptyDataTemplate>
                                 版本记录为空
                             </EmptyDataTemplate>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource_test_version" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [test_version] WHERE ([test_id] = @test_id) ORDER BY [id]">
+                        <h6>* 只包含被指派的测试系统</h6>
+                        <asp:SqlDataSource ID="SqlDataSource_test_version" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT id, name, test_id, start_time, end_time, creation_date, replace(replace(replace(is_finish, '0', '测试中'), '1', '已提交'), '2', '已完成') AS is_finish, total_value FROM [test_version] WHERE ([test_id] = @test_id)">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="test_id" SessionField="current_basedata_test_id" />
                             </SelectParameters>

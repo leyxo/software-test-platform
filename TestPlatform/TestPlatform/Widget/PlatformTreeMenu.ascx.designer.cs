@@ -94,15 +94,6 @@ namespace TestPlatform.Widget {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl basedata_manage_test;
         
         /// <summary>
-        /// basedata_manage_test_version 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl basedata_manage_test_version;
-        
-        /// <summary>
         /// test_manage_menu 控件。
         /// </summary>
         /// <remarks>
@@ -112,22 +103,13 @@ namespace TestPlatform.Widget {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl test_manage_menu;
         
         /// <summary>
-        /// test 控件。
+        /// basedata_manage_test_version 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl test;
-        
-        /// <summary>
-        /// test_case 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl test_case;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl basedata_manage_test_version;
         
         /// <summary>
         /// test_members 控件。

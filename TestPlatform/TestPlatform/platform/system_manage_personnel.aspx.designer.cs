@@ -85,6 +85,15 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.SqlDataSource users_under_review;
         
         /// <summary>
+        /// Button_Add 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Add;
+        
+        /// <summary>
         /// GridView1 控件。
         /// </summary>
         /// <remarks>
@@ -94,13 +103,31 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// userinfo 控件。
+        /// GridView2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource userinfo;
+        protected global::System.Web.UI.WebControls.GridView GridView2;
+        
+        /// <summary>
+        /// userinfo_enabled 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource userinfo_enabled;
+        
+        /// <summary>
+        /// userinfo_disabled 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource userinfo_disabled;
         
         /// <summary>
         /// department 控件。
@@ -128,6 +155,24 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource reg_status;
+        
+        /// <summary>
+        /// alert 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert;
+        
+        /// <summary>
+        /// alert_text 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert_text;
         
         /// <summary>
         /// Footer 控件。

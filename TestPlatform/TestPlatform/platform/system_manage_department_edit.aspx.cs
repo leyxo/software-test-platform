@@ -33,7 +33,7 @@ namespace TestPlatform.platform
             {
                 if (!IsPostBack)
                 {
-                    // 加载部门信息
+                    // 加载机构信息
                     string sql = new StringBuilder("select * from department where")
                     .Append(" id = @id").ToString();
 
@@ -74,7 +74,7 @@ namespace TestPlatform.platform
             }
             else
             {
-                alert_text.InnerText = "部门名称已存在";
+                alert_text.InnerText = "机构名称已存在";
                 alert.Visible = true;
             }
         }

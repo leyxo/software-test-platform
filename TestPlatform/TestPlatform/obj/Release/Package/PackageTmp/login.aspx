@@ -4,12 +4,12 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>登录 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="Content/base.css"/>
 
 </head>
@@ -22,7 +22,7 @@
                 <form id="form1" method="post" role="form" runat="server">
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-user" id="username_icon" style="position: static"></span>
-                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required">
+                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required" autofocus="autofocus">
                     </div>
                     <br />
                     <div class="input-group">

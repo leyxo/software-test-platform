@@ -5,14 +5,13 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>编辑开发描述 - 测试记录 - 测试管理 - 软件测试平台</title>
+    <title>编辑开发描述 - 测试项目 - 测试管理 - 软件测试平台</title>
     
     <%--Style Sheet--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
-    <link rel="stylesheet" href="../Content/bootstrap-datepicker3.css"/>
 
     <script src="../Scripts/jquery-2.2.4.js"></script>
     <%--<script src="../Scripts/bootstrap.min.js"></script>--%>
@@ -30,7 +29,7 @@
         </div>
         <div class="col-md-10">
             <div class="panel panel-default">
-                <div class="panel-heading"><b id="B1" runat="server">测试管理 > 测试记录 > 编辑开发描述</b></div>
+                <div class="panel-heading"><b id="B1" runat="server">测试管理 > 测试项目 > 编辑开发描述</b></div>
                 <div class="panel-body" id="Div1" runat="server">
 
                     <%--主体内容--%>
@@ -41,8 +40,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="test_case_name">测试记录名称</label>
-                                        <input type="text" runat="server" class="form-control" id="test_case_name" readonly="readonly" style="font-weight: bold;" placeholder="测试记录名称" required="required" />
+                                        <label for="test_case_name">测试项目名称</label>
+                                        <input type="text" runat="server" class="form-control" id="test_case_name" readonly="readonly" style="font-weight: bold;" placeholder="测试项目名称" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="test_case_precondition">前置条件</label>

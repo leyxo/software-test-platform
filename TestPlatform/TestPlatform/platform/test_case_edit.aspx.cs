@@ -29,6 +29,27 @@ namespace TestPlatform.platform
             alert.Attributes["class"] = "alert alert-danger";
             alert.Visible = false;
 
+            if (null != Session["current_test_version"])
+            {
+                // 没有选中issue，返回前页
+                if ("" == Session["current_test_version"].ToString() || "0" == Session["current_test_version"].ToString())
+                {
+                    Response.Redirect("/platform/test_case.aspx");
+                }
+                // 当前测试系统已经提交
+                //else
+                //{
+                //    string sql0 = new StringBuilder("select is_finish from test_version where").Append(" id = @id").ToString();
+                //    SqlParameter[] parameters0 = { new SqlParameter("@id", Session["current_test_version"]), };
+                //    DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
+                //    string is_finish = ds0.Tables[0].Rows[0]["is_finish"].ToString();
+                //    if ("1" == is_finish)
+                //    {
+                //        Response.Redirect("/platform/test_case.aspx");
+                //    }
+                //}
+            }
+
             if (null != Session["editing_test_case_id"] && "" != Session["editing_test_case_id"].ToString())
             {
                 if (!IsPostBack)

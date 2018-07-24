@@ -6,7 +6,7 @@ using System.Web;
 namespace TestPlatform
 {
     /// <summary>
-    /// 测试记录表
+    /// 测试项目表
     /// </summary>
     public class Test_case
     {
@@ -18,7 +18,7 @@ namespace TestPlatform
         public string describe;        // 开发描述
         public int times;              // 测试次数
         public int pass;               // 是否通过
-        public int type;               // 错误类型 (外键)
+        public int type;               // 缺陷类型 (外键)
         public int creation_user_id;   // 用例创建者ID (外键)
         public DateTime creation_date; // 用例创建时间
         public int version_id;         // 用例所属版本记录ID (外键, 级联删除)

@@ -33,6 +33,16 @@ namespace TestPlatform.platform
                 Table_Add.Visible = false;
             }
 
+            LinkButton linkButton_edit1 = (LinkButton)GridView1.Rows[0].FindControl("LinkButton_edit");
+            LinkButton linkButton_edit2 = (LinkButton)GridView1.Rows[1].FindControl("LinkButton_edit");
+            LinkButton linkButton_delete_1 = (LinkButton)GridView1.Rows[0].FindControl("LinkButton_delete");
+            LinkButton linkButton_delete_2 = (LinkButton)GridView1.Rows[1].FindControl("LinkButton_delete");
+            linkButton_edit1.Visible = false;
+            linkButton_edit2.Visible = false;
+            linkButton_delete_1.Visible = false;
+            linkButton_delete_2.Visible = false;
+
+
             alert.Attributes["class"] = "alert alert-danger";
             alert.Visible = false;
         }
@@ -41,27 +51,29 @@ namespace TestPlatform.platform
         {
             string name = input_add.Value;
             string describe = input_describe.Value;
+            string point = input_point.Value;
 
             string sql = new StringBuilder("insert into test_issue_type")
-                .Append(" (name, describe)")
-                .Append(" values (@name, @describe)").ToString();
+                .Append(" (name, describe, point)")
+                .Append(" values (@name, @describe, @point)").ToString();
 
             SqlParameter[] parameters = {
                   new SqlParameter("@name", name),
                   new SqlParameter("@describe", describe),
+                  new SqlParameter("@point", point),
             };
 
             if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
             {
                 // 操作成功
                 Response.AddHeader("Refresh", "0");
-                alert_text.InnerText = "添加成功";
-                alert.Attributes["class"] = "alert alert-success";
-                alert.Visible = true;
+                //alert_text.InnerText = "添加成功";
+                //alert.Attributes["class"] = "alert alert-success";
+                //alert.Visible = true;
             }
             else
             {
-                alert_text.InnerText = "错误类型名称已存在";
+                alert_text.InnerText = "添加失败";
                 alert.Attributes["class"] = "alert alert-danger";
                 alert.Visible = true;
             }
@@ -79,21 +91,29 @@ namespace TestPlatform.platform
             // 删除选择
             if (e.CommandName == "del")
             {
-                string sql = new StringBuilder("delete from test_issue_type")
-                .Append(" where id = @id").ToString();
-                SqlParameter[] parameters = {
-                  new SqlParameter("@id", e.CommandArgument.ToString())
-            };
-
-                if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
+                if ("1" == e.CommandArgument.ToString() || "2" == e.CommandArgument.ToString())
                 {
-                    // 操作成功
-                    Response.Redirect("/platform/basedata_manage_issuetype.aspx");
+                    alert_text.InnerText = "基础数据，不可删除";
+                    alert.Visible = true;
                 }
                 else
                 {
-                    alert_text.InnerText = "已有测试记录正在使用当前类型，不可删除";
-                    alert.Visible = true;
+                    string sql = new StringBuilder("delete from test_issue_type")
+                    .Append(" where id = @id").ToString();
+                    SqlParameter[] parameters = {
+                  new SqlParameter("@id", e.CommandArgument.ToString())
+                    };
+
+                    if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
+                    {
+                        // 操作成功
+                        Response.Redirect("/platform/basedata_manage_issuetype.aspx");
+                    }
+                    else
+                    {
+                        alert_text.InnerText = "已有测试项目正在使用当前类型，不可删除";
+                        alert.Visible = true;
+                    }
                 }
             }
         }
