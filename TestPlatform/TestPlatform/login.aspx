@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>登录 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="Content/base.css"/>
 
@@ -18,23 +18,23 @@
         <topbar:TopBar ID="TopBar" runat="server" />
         <div class="panel panel-default">
             <div class="panel-heading"><b>登录</b></div>
-            <div class="panel-body">
+            <div class="panel-body" style="min-height:initial">
                 <form id="form1" method="post" role="form" runat="server">
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-user" id="username_icon" style="position: static"></span>
-                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required" autofocus="autofocus">
+                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" required="required" autofocus="autofocus">
                     </div>
                     <br />
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-option-horizontal" id="password_icon" style="position: static"></span>
-                        <input type="password" runat="server" class="form-control" id="password" placeholder="密码" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required">
+                        <input type="password" runat="server" class="form-control" id="password" placeholder="密码" required="required">
                     </div>
                     <br />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-tag" id="captcha_icon" style="position: static"></span>
-                                <input type="text" runat="server" class="form-control" id="captcha" placeholder="验证码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" required="required">
+                                <input type="text" runat="server" class="form-control" id="captcha" placeholder="验证码"  required="required">
                             </div>
                         </div>
                         <div class="col-md-6">

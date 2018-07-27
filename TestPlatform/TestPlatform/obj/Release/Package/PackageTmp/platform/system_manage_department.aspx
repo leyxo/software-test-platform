@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>机构管理 - 系统管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -34,7 +34,7 @@
                             <h4><strong>所有机构</strong>
                                 <span style="float: right">
                                     <div id="Div_Add_Department" runat="server" class="input-group" style="max-width: 300px; float: right">
-                                        <input id="input_add_department" runat="server" type="text" class="form-control" placeholder="新增机构" required="required">
+                                        <input id="input_add_department" runat="server" type="text" class="form-control" placeholder="新增机构" required="required" autofocus="autofocus">
   
                                         <span class="input-group-btn">
                                             <asp:Button ID="Button_Add_Department" class="btn btn-primary" runat="server" Text="添加" OnClick="Button_Add_Department_Click" />
@@ -63,16 +63,15 @@
                                     </asp:TemplateField>
                                 </Columns>
                                 <EmptyDataTemplate>
-                                    还没有机构...
+                                    还没有机构...这种情况是不存在的
                                 </EmptyDataTemplate>
                             </asp:GridView>
-                            <asp:SqlDataSource ID="SqlDataSource_departmemnt" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [department] ORDER BY [id]"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource_departmemnt" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_department] ORDER BY [id]"></asp:SqlDataSource>
                         </form>
-                        <%--<h6 style="color:red;">* 删除机构还会删除当前机构所有人员数据，请谨慎处理！</h6>--%>
                         <div id="alert" runat="server" class="alert alert-danger alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <span id="alert_text" runat="server"><strong>机构名称已存在！</strong></span>
-                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span id="alert_text" runat="server"><strong>机构名称已存在！</strong></span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -35,7 +29,7 @@ namespace TestPlatform.platform
             string name = this.test_name.Value;
             string describe = this.test_describe.Value;
 
-            string sql = new StringBuilder("insert into test")
+            string sql = new StringBuilder("insert into sys_test_name")
                 .Append(" (name, describe, creation_department_id, creation_user_id, creation_date)")
                 .Append(" values (@name, @describe, @creation_department_id, @creation_user_id, @creation_date)").ToString();
 
@@ -55,7 +49,7 @@ namespace TestPlatform.platform
                 alert.Attributes["class"] = "alert alert-success";
 
                 // Session["current_test_id"]设为当前添加项
-                //string sql0 = new StringBuilder("select * from test where")
+                //string sql0 = new StringBuilder("select * from sys_test_name where")
                 //   .Append(" name = @name").ToString();
                 //SqlParameter[] parameters0 = { new SqlParameter("@name", name) };
                 //DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);

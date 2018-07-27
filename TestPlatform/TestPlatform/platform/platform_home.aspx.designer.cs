@@ -76,51 +76,6 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.SqlDataSource test_all;
         
         /// <summary>
-        /// Div_Test_See_More 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Test_See_More;
-        
-        /// <summary>
-        /// label_test_doing 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl label_test_doing;
-        
-        /// <summary>
-        /// label_test_all 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl label_test_all;
-        
-        /// <summary>
-        /// Div_Test_Members_See_More 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Test_Members_See_More;
-        
-        /// <summary>
-        /// label_members_total 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl label_members_total;
-        
-        /// <summary>
         /// Footer 控件。
         /// </summary>
         /// <remarks>

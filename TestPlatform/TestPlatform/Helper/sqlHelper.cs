@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
@@ -71,8 +68,12 @@ namespace TestPlatform
             }
             catch (Exception e)
             {
-                //throw new Exception(e.Message); // 上线时需要注释
+#if DEBUG
+                // debug时抛出异常以便检查
+                throw new Exception(e.Message);
+#else
                 return -1;
+#endif
             }
             finally
             {

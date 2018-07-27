@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -29,12 +24,12 @@ namespace TestPlatform.platform
             alert.Attributes["class"] = "alert alert-danger";
             alert.Visible = false;
 
-            if (null != Session["editing_test_id"] &&"" != Session["editing_test_id"].ToString())
+            if (null != Session["editing_test_id"] && "" != Session["editing_test_id"].ToString())
             {
                 if (!IsPostBack)
                 {
                     // 加载测试项目信息
-                    string sql = new StringBuilder("select * from test where")
+                    string sql = new StringBuilder("select * from sys_test_name where")
                     .Append(" id = @id").ToString();
 
                     SqlParameter[] parameters = {
@@ -42,16 +37,23 @@ namespace TestPlatform.platform
                 };
 
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
-                    test_name.Value = ds.Tables[0].Rows[0]["name"].ToString();
-                    test_describe.Value = ds.Tables[0].Rows[0]["describe"].ToString();
-                    string available = ds.Tables[0].Rows[0]["available"].ToString();
-                    if ("1" == available)
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
-                        test_available.Checked = true;
+                        test_name.Value = ds.Tables[0].Rows[0]["name"].ToString();
+                        test_describe.Value = ds.Tables[0].Rows[0]["describe"].ToString();
+                        string available = ds.Tables[0].Rows[0]["available"].ToString();
+                        if ("1" == available)
+                        {
+                            test_available.Checked = true;
+                        }
+                        else if ("0" == available)
+                        {
+                            test_available.Checked = false;
+                        }
                     }
-                    else if ("0" == available)
+                    else
                     {
-                        test_available.Checked = false;
+                        Response.Redirect("/platform/basedata_manage_test.aspx");
                     }
                 }
             }
@@ -75,7 +77,7 @@ namespace TestPlatform.platform
                 available = "0";
             }
 
-            string sql = new StringBuilder("update test set")
+            string sql = new StringBuilder("update sys_test_name set")
                 .Append(" name = @name, describe = @describe, available = @available")
                 .Append(" where id = @id").ToString();
 

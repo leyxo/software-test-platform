@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
@@ -33,9 +26,9 @@ namespace TestPlatform.platform
             }
             if (!authHelper.hasAuthority(Convert.ToInt32(Session["current_user_role_id"]), "/platform/basedata_manage_test_edit.aspx"))
             {
-                GridView1.Columns[5].Visible = false;
-                GridView1.Columns[6].Visible = false;
                 GridView1.Columns[7].Visible = false;
+                GridView1.Columns[8].Visible = false;
+                GridView1.Columns[9].Visible = false;
             }
 
             Title_All_Test_Count.InnerHtml = GridView1.Rows.Count.ToString();
@@ -65,8 +58,9 @@ namespace TestPlatform.platform
             Session["current_test_version"] = "";
             Session["current_basedata_test_id"] = "";
             Session["current_basedata_test_version"] = "";
+            Session["editing_test_id"] = "";
 
-            string sql = "delete from test where id = '" + GridView1.DataKeys[e.RowIndex]["ID"].ToString() + "'";
+            string sql = "delete from sys_test_name where id = '" + GridView1.DataKeys[e.RowIndex]["ID"].ToString() + "'";
             test_all.DeleteCommand = sql;
         }
 

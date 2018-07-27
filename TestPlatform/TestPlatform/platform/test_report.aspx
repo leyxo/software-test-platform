@@ -15,7 +15,7 @@
     
 
 </head>
-<body>
+<body style="background-color:#FFFFFF;">
     <div class="container" style="width:960px" runat="server">
 
         <form id="form1" runat="server">
@@ -27,18 +27,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         测试系统：<asp:Label ID="name" runat="server" Font-Bold="true" Text=""></asp:Label>
-                        &nbsp;&nbsp;&nbsp;版本：<asp:Label ID="version" runat="server" Font-Bold="true" Text=""></asp:Label>
-                        <br />
-                        <br />
-                        测试时间：<asp:Label ID="start_time" Font-Bold="true" runat="server" Text=""></asp:Label>
-                        <strong>~</strong>&nbsp;<asp:Label ID="end_time" Font-Bold="true" runat="server" Text=""></asp:Label>
+                        <br /><br />
+                        版本：<asp:Label ID="version" runat="server" Font-Bold="true" Text=""></asp:Label>
                         <br />
                     </div>
                     <div class="col-md-6">
-                        版本提交时间：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
-                        <br />
-                        <br />
-                        测试人员：<asp:Label ID="user" Font-Bold="true" runat="server" Text=""></asp:Label>
+                        测试日期：<asp:Label ID="start_time" Font-Bold="true" runat="server" Text=""></asp:Label>
+                        <strong>~</strong>&nbsp;<asp:Label ID="end_time" Font-Bold="true" runat="server" Text=""></asp:Label>
+                        <br /><br />
+                        提交日期：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
                         <br />
                     </div>
                 </div>
@@ -73,7 +70,7 @@
                     测试项目为空
                 </EmptyDataTemplate>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource_test_case" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test_case.id AS ID, test_case.name AS 项目, test_case.precondition AS 前置条件, test_case.process AS 测试过程及结果, test_issue_type.name AS 类型, test_case.times AS 次数, test_case.suggestion AS 改进建议, test_case.describe AS 开发描述, pass.name AS 结论, users.name AS 记录者, test_case.creation_date AS 创建时间 FROM test_case INNER JOIN pass ON pass.id = test_case.pass INNER JOIN users ON users.id = test_case.creation_user_id INNER JOIN test_issue_type ON test_case.type = test_issue_type.id WHERE (test_case.version_id = @version_id)">
+            <asp:SqlDataSource ID="SqlDataSource_test_case" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT sys_test_record.id AS ID, sys_test_record.name AS 项目, sys_test_record.precondition AS 前置条件, sys_test_record.process AS 测试过程及结果, base_issuetype.name AS 类型, sys_test_record.times AS 次数, sys_test_record.suggestion AS 改进建议, sys_test_record.describe AS 开发描述, base_status_pass.name AS 结论, users.name AS 记录者, sys_test_record.creation_date AS 创建时间 FROM sys_test_record INNER JOIN base_status_pass ON base_status_pass.id = sys_test_record.pass INNER JOIN users ON users.id = sys_test_record.creation_user_id INNER JOIN base_issuetype ON sys_test_record.type = base_issuetype.id WHERE (sys_test_record.version_id = @version_id)">
                 <SelectParameters>
                     <asp:SessionParameter DefaultValue="0" Name="version_id" SessionField="current_test_version" Type="Int32" />
                 </SelectParameters>
@@ -86,7 +83,7 @@
             <br />
             <br />
             <h4><strong>以前版本待解决问题</strong></h4>
-            <%--SQL条件：(版本号 < 当前版本 and (未通过 or 有修改意见))--%>
+            <%--SQL条件：(版本号 < 当前版本 and (未通过 or 缺陷类型=2建议修改))--%>
             <asp:GridView ID="GridView2" Class="table table-striped table-bordered table-condensed" Font-Size="Small" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource_test_case_previous" DataKeyNames="ID">
                 <Columns>
                     <asp:BoundField DataField="版本" HeaderText="版本" SortExpression="版本" />
@@ -110,7 +107,7 @@
                     无
                 </EmptyDataTemplate>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource_test_case_previous" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test_version.name AS 版本, test_case.id AS ID, test_case.name AS 项目, test_case.precondition AS 前置条件, test_case.process AS 测试过程及结果, test_issue_type.name AS 类型, test_case.times AS 次数, test_case.suggestion AS 改进建议, test_case.describe AS 开发描述, pass.name AS 结论, users.name AS 记录者, test_case.creation_date AS 创建时间 FROM test_case INNER JOIN pass ON pass.id = test_case.pass INNER JOIN users ON users.id = test_case.creation_user_id INNER JOIN test_issue_type ON test_case.type = test_issue_type.id INNER JOIN test_version ON test_version.id = test_case.version_id WHERE (test_version.test_ID = @test_id and test_case.version_id < @version_id and (test_case.pass = 2 or test_case.suggestion <> ''))">
+            <asp:SqlDataSource ID="SqlDataSource_test_case_previous" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT sys_test_name_version.name AS 版本, sys_test_record.id AS ID, sys_test_record.name AS 项目, sys_test_record.precondition AS 前置条件, sys_test_record.process AS 测试过程及结果, base_issuetype.name AS 类型, sys_test_record.times AS 次数, sys_test_record.suggestion AS 改进建议, sys_test_record.describe AS 开发描述, base_status_pass.name AS 结论, users.name AS 记录者, sys_test_record.creation_date AS 创建时间 FROM sys_test_record INNER JOIN base_status_pass ON base_status_pass.id = sys_test_record.pass INNER JOIN users ON users.id = sys_test_record.creation_user_id INNER JOIN base_issuetype ON sys_test_record.type = base_issuetype.id INNER JOIN sys_test_name_version ON sys_test_name_version.id = sys_test_record.version_id WHERE (sys_test_name_version.test_ID = @test_id and sys_test_record.version_id < @version_id and (sys_test_record.pass = 2 or sys_test_record.type = 2))">
                 <SelectParameters>
                     <asp:SessionParameter DefaultValue="0" Name="test_id" SessionField="current_test_id" Type="Int32" />
                 </SelectParameters>

@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform
 {
@@ -104,9 +97,6 @@ namespace TestPlatform
                 {
                     sendEmail(ForgotInfo.email);
 
-                    // 在新线程中处理60s计数操作
-                    //Thread thread_code_process = new Thread(new ThreadStart(codeProcess));
-                    //thread_code_process.Start();
                     Button_SendEmail.Text = "已发送";
                     Button_SendEmail.Attributes["disabled"] = "disabled";
                     Button_SendEmail.Attributes["OnClick"] = "return false;";
@@ -126,18 +116,6 @@ namespace TestPlatform
                 alert.Attributes["class"] = "alert alert-danger";
             }
             alert.Visible = true;
-        }
-
-        // 60s后恢复发送验证码按钮
-        private void codeProcess()
-        {
-            Button_SendEmail.Attributes["OnClick"] = "return false;";
-            for (int i = 60; i > 0; i--)
-            {
-                Button_SendEmail.Text = "  " + i + "s  ";
-                Thread.Sleep(1000);
-            }
-            Button_SendEmail.Attributes["OnClick"] = "Button_SendEmail_Click";
         }
 
         // 发送包含验证码的邮件

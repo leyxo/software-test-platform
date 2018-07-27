@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -29,7 +24,7 @@ namespace TestPlatform.platform
             alert.Attributes["class"] = "alert alert-danger";
             alert.Visible = false;
 
-            if ("" != Session["editing_user_id"].ToString())
+            if (null != Session["editing_user_id"] && "" != Session["editing_user_id"].ToString())
             {
                 if (!IsPostBack)
                 {
@@ -42,12 +37,19 @@ namespace TestPlatform.platform
                 };
 
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
-                    username.Value = ds.Tables[0].Rows[0]["name"].ToString();
-                    email.Value = ds.Tables[0].Rows[0]["email"].ToString();
-                    phone.Value = ds.Tables[0].Rows[0]["phone"].ToString();
-                    DropDownList_department.SelectedValue = ds.Tables[0].Rows[0]["department"].ToString();
-                    DropDownList_role.SelectedValue = ds.Tables[0].Rows[0]["role"].ToString();
-                    DropDownList_reg_status.SelectedValue = ds.Tables[0].Rows[0]["reg_status"].ToString();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        username.Value = ds.Tables[0].Rows[0]["name"].ToString();
+                        email.Value = ds.Tables[0].Rows[0]["email"].ToString();
+                        phone.Value = ds.Tables[0].Rows[0]["phone"].ToString();
+                        DropDownList_department.SelectedValue = ds.Tables[0].Rows[0]["department"].ToString();
+                        DropDownList_role.SelectedValue = ds.Tables[0].Rows[0]["role"].ToString();
+                        DropDownList_reg_status.SelectedValue = ds.Tables[0].Rows[0]["reg_status"].ToString();
+                    }
+                    else
+                    {
+                        Response.Redirect("/platform/system_manage_personnel.aspx");
+                    }
                 }
             }
             else

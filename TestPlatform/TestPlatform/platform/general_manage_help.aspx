@@ -10,12 +10,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>使用帮助 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -28,8 +28,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><b id="B1" runat="server">使用帮助</b></div>
                 <div class="panel-body" id="Div1" runat="server">
-
-                    <%--主体内容--%>
 
                     <%--HelpPage--%>
                     <helppage:HelpPage ID="HelpPage" runat="server" />

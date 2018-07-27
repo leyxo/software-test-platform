@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>权限管理 - 系统管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -34,7 +34,7 @@
                         <h4><strong>权限分配表</strong></h4>
                         <br />
                         <form id="form1" role="form" runat="server">
-                            <asp:GridView ID="GridView1" Class="table table-striped table-hover table-bordered table-condensed" style='text-align: center;' Font-Size="Small" runat="server" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="model">
+                            <asp:GridView ID="GridView1" Class="table table-hover table-bordered table-condensed" style='text-align: center;' Font-Size="Small" runat="server" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="model">
                                 <Columns>
                                     <asp:BoundField DataField="id" HeaderText="模块ID" InsertVisible="False" ReadOnly="True" SortExpression="id" Visible="False" />
                                     <asp:BoundField DataField="name" HeaderText="模块名称" SortExpression="name" />
@@ -61,7 +61,7 @@
                                 </Columns>
                             </asp:GridView>
 
-                            <asp:SqlDataSource ID="model" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [model] ORDER BY sort_order"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="model" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_model] ORDER BY sort_order"></asp:SqlDataSource>
 
                             <div id="alert" runat="server" class="alert alert-success alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

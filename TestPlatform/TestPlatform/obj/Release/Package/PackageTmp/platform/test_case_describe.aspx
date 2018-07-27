@@ -9,16 +9,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>编辑开发描述 - 测试项目 - 测试管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
 
     <script src="../Scripts/jquery-2.2.4.js"></script>
-    <%--<script src="../Scripts/bootstrap.min.js"></script>--%>
     <script src="../Scripts/bootstrap-datepicker.js"></script>
 
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -59,7 +58,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="test_case_describes">开发描述</label>
-                                        <textarea rows="5" runat="server" class="form-control" style="resize: vertical" id="test_case_describes" placeholder=""></textarea>
+                                        <textarea rows="5" runat="server" class="form-control" style="resize: vertical" id="test_case_describes" placeholder="" autofocus="autofocus"></textarea>
                                     </div>
 
                                 </div>

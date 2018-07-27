@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
@@ -34,68 +28,14 @@ namespace TestPlatform.platform
                 initWidght();
                 alert.Visible = false;
             }
-
-            if (Session["current_test_id"] != null && Session["current_test_id"].ToString() == "")
-            {
-                // 第一次加载时，初始化Session["current_test_id"]和Session["current_test_version"]
-                // 获取第一个项目id
-                string sql = new StringBuilder("select test.id from test INNER JOIN test_users ON test.id = test_users.test_id where")
-                    .Append(" test_users.user_id = @user_id").ToString();
-                SqlParameter[] parameters = {
-                    new SqlParameter("@user_id", Session["current_user_id"]),
-                };
-                DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    Session["current_test_id"] = ds.Tables[0].Rows[0]["id"].ToString();
-
-                    // 获取第一个版本id
-                    string sql2 = new StringBuilder("select id from test_version where")
-                        .Append(" test_id = @test_id").ToString();
-                    SqlParameter[] parameters2 = {
-                    new SqlParameter("@test_id", Session["current_test_id"]),
-                    };
-                    DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
-                    if (ds2.Tables[0].Rows.Count > 0)
-                    {
-                        Session["current_test_version"] = ds2.Tables[0].Rows[0]["id"].ToString();
-                    }
-                    else
-                    {
-                        Session["current_test_version"] = "0";
-                    }
-                }
-                else
-                {
-                    Session["current_test_id"] = "0";
-                }
-            }
-
-            // 测试系统还在，但是当前版本被删除时，初始化为第一个存在的版本
-            if (Session["current_test_version"] != null && (Session["current_test_version"].ToString() == "" || Session["current_test_version"].ToString() == "0") && Session["current_test_id"] != null && Session["current_test_id"].ToString() != "" && Session["current_test_id"].ToString() != "0")
-            {
-                // 获取第一个版本id
-                string sql2 = new StringBuilder("select id from test_version where")
-                    .Append(" test_id = @test_id").ToString();
-                SqlParameter[] parameters2 = {
-                    new SqlParameter("@test_id", Session["current_test_id"]),
-                    };
-                DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
-                if (ds2.Tables[0].Rows.Count > 0)
-                {
-                    Session["current_test_version"] = ds2.Tables[0].Rows[0]["id"].ToString();
-                }
-                else
-                {
-                    Session["current_test_version"] = "0";
-                }
-            }
         }
 
 
+        /// <summary>
+        /// 根据权限初始化界面控件
+        /// </summary>
         protected void initWidght()
         {
-            // 根据权限初始化界面控件
             if (!authHelper.hasAuthority(Convert.ToInt32(Session["current_user_role_id"]), "/platform/test_case_add.aspx"))
             {
                 Button_Add_Case.Visible = false;
@@ -126,112 +66,7 @@ namespace TestPlatform.platform
                 Button_Finish.Visible = false;
             }
         }
-
-
-        ///// <summary>
-        ///// 在测试系统DropDownList数据绑定以后，选中指定默认项   ***注意此坑***
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //protected void DropDownList_test_DataBound(object sender, EventArgs e)
-        //{
-        //    if (Session["current_test_id"].ToString() != "" && Session["current_test_id"].ToString() != "0")
-        //    {
-        //        DropDownList_test.Items.FindByValue(Session["current_test_id"].ToString()).Selected = true;
-        //        setVersionInfo();
-        //        initWidght();
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 在版本DropDownList数据绑定以后，选中指定默认项
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //protected void DropDownList_test_version_DataBound(object sender, EventArgs e)
-        //{
-        //    if (Session["current_test_version"].ToString() != "" && Session["current_test_version"].ToString() != "0")
-        //    {
-        //        DropDownList_test_version.Items.FindByValue(Session["current_test_version"].ToString()).Selected = true;
-        //        setVersionInfo();
-        //        initWidght();
-        //    }
-        //}
         
-        ///// <summary>
-        ///// 在测试系统DropDownList改变选择时
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //protected void DropDownList_test_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    // 初始化 Session["current_test_version"]
-        //    Session["current_test_id"] = DropDownList_test.SelectedValue;
-        //    // 获取第一个版本id
-        //    string sql = new StringBuilder("select id from test_version where")
-        //        .Append(" test_id = @test_id").ToString();
-        //    SqlParameter[] parameters = {
-        //            new SqlParameter("@test_id", Session["current_test_id"]),
-        //            };
-        //    DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
-        //    if (ds.Tables[0].Rows.Count > 0)
-        //    {
-        //        Session["current_test_version"] = ds.Tables[0].Rows[0]["id"].ToString();
-        //    }
-        //    else
-        //    {
-        //        Session["current_test_version"] = "0";
-        //    }
-        //    setVersionInfo();
-        //    initWidght();
-        //}
-
-        ///// <summary>
-        ///// 在版本DropDownList改变选择时
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //protected void DropDownList_test_version_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    Session["current_test_version"] = DropDownList_test_version.SelectedValue;
-        //    setVersionInfo();
-        //    initWidght();
-        //}
-
-
-        protected void Button_Add_Case_Click(object sender, EventArgs e)
-        {
-            //if (DropDownList_test.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有测试系统";
-            //    alert.Visible = true;
-            //}
-            //else if (DropDownList_test_version.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有版本";
-            //    alert.Visible = true;
-            //}
-            //else
-            //{
-                string sql = "select * from test_version where id = " + Session["current_test_version"];
-                DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    // 判断项目进行情况
-                    string is_finish = ds.Tables[0].Rows[0]["is_finish"].ToString();
-                    if ("0" == is_finish)
-                    {
-                        Response.Redirect("/platform/test_case_add.aspx");
-                    }
-                    else
-                    {
-                        alert_text.InnerHtml = "版本已提交";
-                        alert.Visible = true;
-                    }
-                }
-            //}
-        }
-
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             // 编辑选择项目
@@ -251,7 +86,9 @@ namespace TestPlatform.platform
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            string sql = "delete from test_case where id = '" + GridView1.DataKeys[e.RowIndex]["ID"].ToString() + "'";
+            Session["editing_test_case_id"] = "";
+
+            string sql = "delete from sys_test_record where id = '" + GridView1.DataKeys[e.RowIndex]["ID"].ToString() + "'";
             SqlDataSource_test_case.DeleteCommand = sql;
         }
 
@@ -270,9 +107,9 @@ namespace TestPlatform.platform
         /// </summary>
         protected void setVersionInfo()
         {
-            if (Session["current_test_version"] != null && Session["current_test_version"].ToString() != "")
+            if (null != Session["current_test_version"] && "" != Session["current_test_version"].ToString())
             {
-                string sql = "select test.name, test_version.name, test_version.creation_date, start_time, end_time, summary, is_finish  from test_version INNER JOIN test ON test.id = test_version.test_id where test_version.id = " + Session["current_test_version"];
+                string sql = "select sys_test_name.name, sys_test_name_version.name, sys_test_name_version.creation_date, start_time, end_time, summary, is_finish  from sys_test_name_version INNER JOIN sys_test_name ON sys_test_name.id = sys_test_name_version.test_id where sys_test_name_version.id = " + Session["current_test_version"];
                 DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
@@ -283,14 +120,12 @@ namespace TestPlatform.platform
                     start_time.Text = ds.Tables[0].Rows[0][3].ToString().Split(' ')[0];
                     end_time.Text = ds.Tables[0].Rows[0][4].ToString().Split(' ')[0];
                     textfield_summary.Value = ds.Tables[0].Rows[0][5].ToString();
-                    user.Text = Session["current_user_name"].ToString();
                     // 判断项目进行情况
                     string is_finish = ds.Tables[0].Rows[0][6].ToString();
                     if ("0" == is_finish)
                     {
-                        // 可以写测试，可以[提交]，不可写总结，不可[完成]，不可写回馈，不可看报告
-                        status.ForeColor = System.Drawing.Color.Green;
-                        status.Text = "测试中";
+                        // 可以写测试，可以[提交]，不可写总结，不可[完成]，不可写回馈，不可查看报告
+                        test_case_status.InnerHtml = "<span style=\"color: darkgreen\"><strong>测试中</strong></span> -- <span style=\"color: lightgray\">已提交</span> -- <span style=\"color: lightgray\">已结束</span>";
                         Button_Save.Visible = false;
                         Button_Submit.Visible = true;
                         Button_Generate_Report.Visible = false;
@@ -303,9 +138,8 @@ namespace TestPlatform.platform
                     }
                     else if ("1" == is_finish)
                     {
-                        // 不可写测试，不可[提交]，可以写总结，可以[完成]，不可写回馈，不可看报告
-                        status.ForeColor = System.Drawing.Color.DarkOrange;
-                        status.Text = "已提交";
+                        // 不可写测试，不可[提交]，可以写总结，可以[完成]，不可写回馈，不可查看报告
+                        test_case_status.InnerHtml = "<span style=\"color: lightgray\">测试中</span> -- <span style=\"color: darkorange\"><strong>已提交</strong></span> -- <span style=\"color: lightgray\">已结束</span>";
                         Button_Save.Visible = true;
                         Button_Submit.Visible = false;
                         Button_Generate_Report.Visible = false;
@@ -318,9 +152,8 @@ namespace TestPlatform.platform
                     }
                     else if ("2" == is_finish)
                     {
-                        // 不可写测试，不可[提交]，不可写总结，不可[完成]，可以写回馈，可以看报告
-                        status.ForeColor = System.Drawing.Color.Black;
-                        status.Text = "已完成";
+                        // 不可写测试，不可[提交]，不可写总结，不可[完成]，可以写回馈，可以查看报告
+                        test_case_status.InnerHtml = "<span style=\"color: lightgray\">测试中</span> -- <span style=\"color: lightgray\">已提交</span> -- <span style=\"color: black\"><strong>已结束</strong></span>";
                         Button_Save.Visible = false;
                         Button_Submit.Visible = false;
                         Button_Generate_Report.Visible = true;
@@ -334,35 +167,27 @@ namespace TestPlatform.platform
                 }
                 else
                 {
-                    creation_date.Text = "";
-                    start_time.Text = "无";
-                    end_time.Text = "无";
-                    user.Text = "";
-                    status.Text = "";
-
-                    // 啥也没有时，让按钮全部再见
-                    Button_Save.Visible = false;
-                    Button_Submit.Visible = false;
-                    Button_Generate_Report.Visible = false;
-                    Button_Add_Case.Visible = false;
-                    Button_Finish.Visible = false;
-                    textfield_summary.Value = "";
+                    Response.Redirect("/platform/basedata_manage_test_version.aspx");
                 }
             }
             else
             {
-                creation_date.Text = "";
-                start_time.Text = "";
-                end_time.Text = "";
-                user.Text = "";
-                status.Text = "";
+                Response.Redirect("/platform/basedata_manage_test_version.aspx");
+            }
+        }
 
-                Button_Save.Visible = false;
-                Button_Submit.Visible = false;
-                Button_Generate_Report.Visible = false;
-                Button_Add_Case.Visible = false;
-                Button_Finish.Visible = false;
-                textfield_summary.Value = "";
+        /// <summary>
+        /// 新建测试项目
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Button_Add_Case_Click(object sender, EventArgs e)
+        {
+            string sql = "select * from sys_test_name_version where id = " + Session["current_test_version"];
+            DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                Response.Redirect("/platform/test_case_add.aspx");
             }
         }
 
@@ -373,20 +198,7 @@ namespace TestPlatform.platform
         /// <param name="e"></param>
         protected void Button_Generate_Report_Click(object sender, EventArgs e)
         {
-            //if (DropDownList_test.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有测试系统";
-            //    alert.Visible = true;
-            //}
-            //else if (DropDownList_test_version.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有版本";
-            //    alert.Visible = true;
-            //}
-            //else
-            //{
-                Response.Write("<script     language='javascript'>window.open('/platform/test_report.aspx');</script>");
-            //}
+            Response.Write("<script>window.open('/platform/test_report.aspx');</script>");
         }
 
         /// <summary>
@@ -396,39 +208,26 @@ namespace TestPlatform.platform
         /// <param name="e"></param>
         protected void Button_Submit_Click(object sender, EventArgs e)
         {
-            //if (DropDownList_test.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有测试系统";
-            //    alert.Visible = true;
-            //}
-            //else if (DropDownList_test_version.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有版本";
-            //    alert.Visible = true;
-            //}
-            //else
-            //{
-                string sql = new StringBuilder("update test_version set")
-                .Append(" is_finish = 1")
-                .Append(" where id = @id").ToString();
+            string sql = new StringBuilder("update sys_test_name_version set")
+            .Append(" is_finish = 1")
+            .Append(" where id = @id").ToString();
 
-                SqlParameter[] parameters = {
-                    new SqlParameter("@id", Session["current_test_version"]),
-                };
-                
-                if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
-                {
-                    // 操作成功
-                    alert_text.InnerText = "版本已提交";
-                    alert.Attributes["class"] = "alert alert-success";
-                    Response.Redirect("/platform/test_case.aspx");
-                }
-                else
-                {
-                    alert_text.InnerText = "操作失败";
-                }
-                alert.Visible = true;
-            //}
+            SqlParameter[] parameters = {
+                new SqlParameter("@id", Session["current_test_version"]),
+            };
+            
+            if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
+            {
+                // 操作成功
+                alert_text.InnerText = "版本已提交";
+                alert.Attributes["class"] = "alert alert-success";
+                Response.Redirect("/platform/test_case.aspx");
+            }
+            else
+            {
+                alert_text.InnerText = "操作失败";
+            }
+            alert.Visible = true;
         }
 
         /// <summary>
@@ -438,39 +237,26 @@ namespace TestPlatform.platform
         /// <param name="e"></param>
         protected void Button_Finish_Click(object sender, EventArgs e)
         {
-            //if (DropDownList_test.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有测试系统";
-            //    alert.Visible = true;
-            //}
-            //else if (DropDownList_test_version.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有版本";
-            //    alert.Visible = true;
-            //}
-            //else
-            //{
-                string sql = new StringBuilder("update test_version set")
-                .Append(" is_finish = 2")
-                .Append(" where id = @id").ToString();
+            string sql = new StringBuilder("update sys_test_name_version set")
+            .Append(" is_finish = 2")
+            .Append(" where id = @id").ToString();
 
-                SqlParameter[] parameters = {
-                    new SqlParameter("@id", Session["current_test_version"]),
-                };
+            SqlParameter[] parameters = {
+                new SqlParameter("@id", Session["current_test_version"]),
+            };
 
-                if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
-                {
-                    // 操作成功
-                    alert_text.InnerText = "当前版本测试已结束";
-                    alert.Attributes["class"] = "alert alert-success";
-                    Response.Redirect("/platform/test_case.aspx");
-                }
-                else
-                {
-                    alert_text.InnerText = "操作失败";
-                }
-                alert.Visible = true;
-            //}
+            if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
+            {
+                // 操作成功
+                alert_text.InnerText = "当前版本测试已结束";
+                alert.Attributes["class"] = "alert alert-success";
+                Response.Redirect("/platform/test_case.aspx");
+            }
+            else
+            {
+                alert_text.InnerText = "操作失败";
+            }
+            alert.Visible = true;
         }
 
         /// <summary>
@@ -482,39 +268,26 @@ namespace TestPlatform.platform
         {
             string textfield_summary = this.textfield_summary.Value;
 
-            //if (DropDownList_test.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有测试系统";
-            //    alert.Visible = true;
-            //}
-            //else if (DropDownList_test_version.Items.Count == 0)
-            //{
-            //    alert_text.InnerHtml = "没有版本";
-            //    alert.Visible = true;
-            //}
-            //else
-            //{
-                string sql = new StringBuilder("update test_version set")
-                .Append(" summary = @summary")
-                .Append(" where id = @id").ToString();
+            string sql = new StringBuilder("update sys_test_name_version set")
+            .Append(" summary = @summary")
+            .Append(" where id = @id").ToString();
 
-                SqlParameter[] parameters = {
-                    new SqlParameter("@summary", textfield_summary),
-                    new SqlParameter("@id", Session["current_test_version"]) };
+            SqlParameter[] parameters = {
+                new SqlParameter("@summary", textfield_summary),
+                new SqlParameter("@id", Session["current_test_version"]) };
 
-                if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
-                {
-                    // 操作成功
-                    Response.Redirect("/platform/test_case.aspx");
-                    alert_text.InnerText = "保存成功";
-                    alert.Attributes["class"] = "alert alert-success";
-                }
-                else
-                {
-                    alert_text.InnerText = "操作失败";
-                }
-                alert.Visible = true;
-            //}
+            if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
+            {
+                // 操作成功
+                Response.Redirect("/platform/test_case.aspx");
+                alert_text.InnerText = "保存成功";
+                alert.Attributes["class"] = "alert alert-success";
+            }
+            else
+            {
+                alert_text.InnerText = "操作失败";
+            }
+            alert.Visible = true;
         }
 
         /// <summary>
@@ -529,7 +302,17 @@ namespace TestPlatform.platform
             Response.Redirect("/platform/basedata_manage_test_version.aspx");
         }
 
-        
+        /// <summary>
+        /// 搜索以前版本
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Button_Search_Previous_Click(object sender, EventArgs e)
+        {
+            string res = "SELECT sys_test_name_version.name AS 版本, sys_test_record.id AS ID, sys_test_record.name AS 项目, sys_test_record.precondition AS 前置条件, sys_test_record.process AS 测试过程及结果, base_issuetype.name AS 类型, sys_test_record.times AS 次数, sys_test_record.suggestion AS 改进建议, sys_test_record.describe AS 开发描述, base_status_pass.name AS 结论, users.name AS 记录者, sys_test_record.creation_date AS 创建时间 FROM sys_test_record INNER JOIN base_status_pass ON base_status_pass.id = sys_test_record.pass INNER JOIN users ON users.id = sys_test_record.creation_user_id INNER JOIN base_issuetype ON sys_test_record.type = base_issuetype.id INNER JOIN sys_test_name_version ON sys_test_name_version.id = sys_test_record.version_id WHERE sys_test_name_version.test_ID = @test_id and sys_test_record.version_id < @version_id and (sys_test_record.pass = 2 or sys_test_record.type = 2) and (sys_test_record.process like '%" + search_previous.Value.ToString() + "%' or sys_test_record.suggestion like '%" + search_previous.Value.ToString() + "%')";
+            SqlDataSource_test_case_previous.SelectCommand = res;
+            GridView2.DataSourceID = "SqlDataSource_test_case_previous";
+            GridView2.DataBind();
+        }
     }
-
 }

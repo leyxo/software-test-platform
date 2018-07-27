@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TestPlatform
 {
@@ -17,10 +14,11 @@ namespace TestPlatform
         public string suggestion;      // 改进建议
         public string describe;        // 开发描述
         public int times;              // 测试次数
-        public int pass;               // 是否通过
+        public int pass;               // 通过
         public int type;               // 缺陷类型 (外键)
         public int creation_user_id;   // 用例创建者ID (外键)
         public DateTime creation_date; // 用例创建时间
         public int version_id;         // 用例所属版本记录ID (外键, 级联删除)
+        public int total_value;        // 扣分
     }
 }

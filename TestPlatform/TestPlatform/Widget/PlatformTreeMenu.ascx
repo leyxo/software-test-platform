@@ -22,8 +22,8 @@
                 <i class="glyphicon glyphicon glyphicon-inbox"></i> 基础数据管理<span class="pull-right glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul id="basedata_manage" class="nav nav-list collapse secondmenu" style="height: 0px;">
-                <li runat="server" id="basedata_manage_issuetype"><a href="../platform/basedata_manage_issuetype.aspx"><i class="glyphicon glyphicon glyphicon-tags"></i> 缺陷类型定义</a></li>
-                <li runat="server" id="basedata_manage_test"><a href="../platform/basedata_manage_test.aspx"><i class="glyphicon glyphicon glyphicon-font"></i> 测试系统维护</a></li>
+                <li runat="server" id="basedata_manage_issuetype"><a href="../platform/basedata_manage_issuetype.aspx"><i class="glyphicon glyphicon glyphicon-font"></i> 缺陷类型定义</a></li>
+                <li runat="server" id="basedata_manage_test"><a href="../platform/basedata_manage_test.aspx"><i class="glyphicon glyphicon glyphicon-tags"></i> 测试系统维护</a></li>
             </ul>
         </li>
         <li runat="server" id="test_manage_menu">
@@ -31,7 +31,7 @@
                 <i class="glyphicon glyphicon glyphicon-inbox"></i> 测试管理<span class="pull-right glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul id="test_manage" class="nav nav-list collapse secondmenu" style="height: 0px;">
-                <li runat="server" id="basedata_manage_test_version"><a href="../platform/basedata_manage_test_version.aspx"><i class="glyphicon glyphicon glyphicon-object-align-left"></i> 测试版本</a></li>
+                <li runat="server" id="basedata_manage_test_version"><a href="../platform/basedata_manage_test_version.aspx"><i class="glyphicon glyphicon glyphicon-object-align-left"></i> 测试管理</a></li>
                 <%--<li runat="server" id="test_case"><a href="../platform/test_case.aspx"><i class="glyphicon glyphicon glyphicon-check"></i> 测试项目</a></li>--%>
                 <li runat="server" id="test_members"><a href="../platform/test_members.aspx"><i class="glyphicon glyphicon-pencil"></i> 测试报告</a></li>
             </ul>

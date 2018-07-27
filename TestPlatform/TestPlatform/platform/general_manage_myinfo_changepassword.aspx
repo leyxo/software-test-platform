@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>密码修改 - 个人信息 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -36,17 +36,17 @@
                         <form id="form1" method="post" role="form" runat="server">
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-lock" style="position: static"></span>
-                                <input type="password" runat="server" class="form-control" id="password_old" placeholder="旧密码" aria-describedby="password_icon" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                                <input type="password" runat="server" class="form-control" id="password_old" placeholder="旧密码" aria-describedby="password_icon" required="required" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                             </div>
                             <br />
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-option-horizontal" style="position: static"></span>
-                                <input type="password" runat="server" class="form-control" id="password" placeholder="新密码" aria-describedby="password_icon" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                                <input type="password" runat="server" class="form-control" id="password" placeholder="新密码" aria-describedby="password_icon" required="required" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                             </div>
                             <br />
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-option-horizontal" style="position: static"></span>
-                                <input type="password" runat="server" class="form-control" id="password_confirm" placeholder="确认新密码" aria-describedby="password_icon" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                                <input type="password" runat="server" class="form-control" id="password_confirm" placeholder="确认新密码" aria-describedby="password_icon" required="required" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                             </div>
                             <br />
                             <div id="alert" runat="server" class="alert alert-danger alert-dismissible" role="alert">

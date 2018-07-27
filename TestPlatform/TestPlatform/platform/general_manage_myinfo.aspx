@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>个人信息 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -43,7 +43,7 @@
                                     <br />
                                     <div class="input-group">
                                         <span class="input-group-addon glyphicon glyphicon-envelope" id="emil_icon" style="position: static"></span>
-                                        <input type="text" runat="server" class="form-control" id="email" placeholder="邮箱" required="required" />
+                                        <input type="text" runat="server" class="form-control" id="email" placeholder="邮箱" />
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -56,13 +56,13 @@
                                     <div class="input-group">
                                         <span class="input-group-addon" style="position: static">机构</span>
                                         <asp:DropDownList ID="DropDownList_department" runat="server" DataSourceID="SqlDataSource_register_department" DataTextField="name" DataValueField="id" Height="34px" Width="128px" Enabled="False" ToolTip="不可修改机构" BackColor="#F8F8F8"></asp:DropDownList>
-                                        <asp:SqlDataSource ID="SqlDataSource_register_department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [department]"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource_register_department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_department]"></asp:SqlDataSource>
                                     </div>
                                     <br />
                                     <div class="input-group">
                                         <span class="input-group-addon" style="position: static">角色</span>
                                         <asp:DropDownList ID="DropDownList_role" runat="server" DataSourceID="SqlDataSource_register_role" DataTextField="name" DataValueField="id" Height="34px" Width="128px" Enabled="False" ToolTip="不可修改用户角色" BackColor="#F8F8F8"></asp:DropDownList>
-                                        <asp:SqlDataSource ID="SqlDataSource_register_role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [role]"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource_register_role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_role]"></asp:SqlDataSource>
                                     </div>
                                     <br />
                                 </div>

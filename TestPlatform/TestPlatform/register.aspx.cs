@@ -51,7 +51,11 @@ namespace TestPlatform
             string emailStr = @"([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,5})+";
             string phoneStr = @"(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}";
 
-            if (users.name.Length > 16)
+            if (users.name == "" || users.password == "")
+            {
+                alert_text.InnerText = "用户名和密码不能为空";
+            }
+            else if (users.name.Length > 16)
             {
                 alert_text.InnerText = "用户名长度不超过16位";
             }

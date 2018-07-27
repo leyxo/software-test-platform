@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
@@ -31,7 +26,7 @@ namespace TestPlatform.platform
 
             if (!IsPostBack)
             {
-                string sql0 = "select * from model";
+                string sql0 = "select * from base_model";
                 DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, null);
                 for (int i = 0; i < ds0.Tables[0].Rows.Count; i++)
                 {
@@ -62,12 +57,13 @@ namespace TestPlatform.platform
                         if (ds0.Tables[0].Rows[i]["name"].ToString() == "权限管理")
                     {
                         CheckBox checkBox1 = (CheckBox)GridView1.Rows[i].FindControl("CheckBox1");
+                        checkBox1.Checked = true;
                         checkBox1.Visible = false;
                     }
                 }
 
                 // 加载权限表信息
-                string sql = "select * from role_model";
+                string sql = "select * from base_grant_rolemodel";
                 DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
@@ -83,11 +79,11 @@ namespace TestPlatform.platform
         protected void Button_Save_Click(object sender, EventArgs e)
         {
             // 先清空权限表
-            string sql_clearAll = "truncate table role_model";
+            string sql_clearAll = "truncate table base_grant_rolemodel";
             sqlHelper.ExecuteNonQuery(sql_clearAll, null);
 
             // 写入新的权限项
-            StringBuilder stringBuilder = new StringBuilder("insert into role_model (role_id, model_id) values");
+            StringBuilder stringBuilder = new StringBuilder("insert into base_grant_rolemodel (role_id, model_id) values");
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
                 for (int j = 0; j < GridView1.Columns.Count - 2; j++)  // 一共有5列，其中有一列隐藏的ID项，所以-2
@@ -101,7 +97,7 @@ namespace TestPlatform.platform
             }
               
             string sql = stringBuilder.ToString();
-            sql = sql.Remove(sql.LastIndexOf(","), 1); // 截掉最后一个","
+            sql = sql.Remove(sql.LastIndexOf(","), 1); // 截掉sql语句最后一个","
 
             if (-1 != sqlHelper.ExecuteNonQuery(sql, null))
             {

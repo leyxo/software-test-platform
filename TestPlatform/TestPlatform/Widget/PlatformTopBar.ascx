@@ -20,7 +20,7 @@
                 <li class="dropdown">
                     <a  id="username" runat="server" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= Session["current_user_department_name"] %>，<strong><%= Session["current_user_name"] %></strong><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../platform/general_manage_help.aspx">帮助中心</a></li>
+                        <li><a href="../platform/general_manage_help.aspx">帮助</a></li>
                         <li><a href="../platform/general_manage_feedback.aspx">意见反馈</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="../platform/general_manage_myinfo.aspx">个人信息</a></li>

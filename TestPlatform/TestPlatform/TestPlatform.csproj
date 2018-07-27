@@ -98,6 +98,7 @@
     <Content Include="images\1.svg" />
     <Content Include="images\2.svg" />
     <Content Include="images\3.svg" />
+    <Content Include="images\help\test_case.png" />
     <Content Include="logout.aspx" />
     <Content Include="platform\basedata_manage_issuetype.aspx" />
     <Content Include="platform\basedata_manage_issuetype_edit.aspx" />

@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.Widget
 {
@@ -15,19 +6,7 @@ namespace TestPlatform.Widget
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 修改HTML元素文本
-            //this.username.InnerText = "欢迎您，" + Request.Form["TextBox_Username"];
+           
         }
-
-        // 修改界面用户名
-        // asp用法：<%= getUsername() %>
-        public string getUsername()
-        {
-            string html = Session["current_user_name"].ToString();
-            //string html =  Request.Form["TextBox_Username"];
-            return html;
-        }
-
-
     }
 }

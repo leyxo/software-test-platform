@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -30,7 +25,7 @@ namespace TestPlatform.platform
             alert.Visible = false;
 
             // 获取测试系统名称、版本号
-            string sql = new StringBuilder("select name from test where").Append(" id = @id").ToString();
+            string sql = new StringBuilder("select name from sys_test_name where").Append(" id = @id").ToString();
             SqlParameter[] parameters = { new SqlParameter("@id", Session["current_basedata_test_id"].ToString()), };
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
             string test_name = ds.Tables[0].Rows[0]["name"].ToString();
@@ -59,7 +54,7 @@ namespace TestPlatform.platform
 
             string number = string.Format("{0:yyyyMMddHHmmssfff}", DateTime.Now);
 
-            string sql = new StringBuilder("insert into test_version")
+            string sql = new StringBuilder("insert into sys_test_name_version")
                 .Append(" (name, test_id, number, start_time, end_time, creation_date)")
                 .Append(" values (@name, @test_id, @number, @start_time, @end_time, @creation_date)").ToString();
 

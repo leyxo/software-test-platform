@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -27,10 +22,10 @@ namespace TestPlatform.platform
             }
 
             // 加载页头信息
-            if (Session["current_test_id"] != null && Session["current_test_version"] != null && Session["current_test_id"].ToString() != "" && Session["current_test_version"].ToString() != "")
+            if (null != Session["current_test_id"] && null != Session["current_test_version"] && "" != Session["current_test_id"].ToString() && "" != Session["current_test_version"].ToString())
             {
                 // 系统名称
-                string sql = new StringBuilder("select * from test where")
+                string sql = new StringBuilder("select * from sys_test_name where")
                         .Append(" id = @id").ToString();
                 SqlParameter[] parameters = {
                     new SqlParameter("@id", Session["current_test_id"]),
@@ -44,7 +39,7 @@ namespace TestPlatform.platform
                 }
 
                 // 系统版本
-                string sql2 = new StringBuilder("select * from test_version where")
+                string sql2 = new StringBuilder("select * from sys_test_name_version where")
                             .Append(" id = @id").ToString();
                 SqlParameter[] parameters2 = {
                     new SqlParameter("@id", Session["current_test_version"]),
@@ -61,22 +56,23 @@ namespace TestPlatform.platform
             }
         }
 
-        
+        /// <summary>
+        /// 设置当前版本信息
+        /// </summary>
         protected void setVersionInfo()
         {
-            string sql = "select * from test_version where id = " + Session["current_test_version"];
+            string sql = "select * from sys_test_name_version where id = " + Session["current_test_version"];
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
             if (ds.Tables[0].Rows.Count > 0)
             {
-                creation_date.Text = ds.Tables[0].Rows[0]["creation_date"].ToString();
-                start_time.Text = ds.Tables[0].Rows[0]["start_time"].ToString().Split(' ')[0]; ;
+                creation_date.Text = ds.Tables[0].Rows[0]["creation_date"].ToString().Split(' ')[0];
+                start_time.Text = ds.Tables[0].Rows[0]["start_time"].ToString().Split(' ')[0];
                 end_time.Text = ds.Tables[0].Rows[0]["end_time"].ToString().Split(' ')[0];
                 Label_summery.Text = ds.Tables[0].Rows[0]["summary"].ToString();
                 if (Label_summery.Text == "")
                 {
                     Label_summery.Text = "无";
                 }
-                user.Text = Session["current_user_name"].ToString();
             }
             else
             {
@@ -85,7 +81,6 @@ namespace TestPlatform.platform
                 creation_date.Text = "";
                 start_time.Text = "无";
                 end_time.Text = "无";
-                user.Text = "";
             }
         }
 }

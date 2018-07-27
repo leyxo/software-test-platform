@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -30,7 +25,7 @@ namespace TestPlatform.platform
             alert.Visible = false;
 
             // 获取测试系统名称、版本号
-            string sql = new StringBuilder("select name from test where").Append(" id = @id").ToString();
+            string sql = new StringBuilder("select name from sys_test_name where").Append(" id = @id").ToString();
             SqlParameter[] parameters = { new SqlParameter("@id", Session["current_basedata_test_id"]), };
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
             string test_name = ds.Tables[0].Rows[0]["name"].ToString();
@@ -41,7 +36,7 @@ namespace TestPlatform.platform
                 if (!IsPostBack)
                 {
                     // 加载测试项目信息
-                    string sql2 = new StringBuilder("select * from test_version where")
+                    string sql2 = new StringBuilder("select * from sys_test_name_version where")
                     .Append(" id = @id").ToString();
 
                     SqlParameter[] parameters2 = {
@@ -49,18 +44,25 @@ namespace TestPlatform.platform
                 };
 
                     DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
-                    version_name.Value = ds2.Tables[0].Rows[0]["name"].ToString();
-                    if (ds2.Tables[0].Rows[0]["start_time"].ToString() != "")
+                    if (ds2.Tables[0].Rows.Count > 0)
                     {
-                        start_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["start_time"].ToString()).ToShortDateString().ToString();
+                        version_name.Value = ds2.Tables[0].Rows[0]["name"].ToString();
+                        if (ds2.Tables[0].Rows[0]["start_time"].ToString() != "")
+                        {
+                            start_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["start_time"].ToString()).ToShortDateString().ToString();
+                        }
+                        if (ds2.Tables[0].Rows[0]["end_time"].ToString() != "")
+                        {
+                            end_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["end_time"].ToString()).ToShortDateString().ToString();
+                        }
+                        if (ds2.Tables[0].Rows[0]["creation_date"].ToString() != "")
+                        {
+                            creation_date.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["creation_date"].ToString()).ToShortDateString().ToString();
+                        }
                     }
-                    if (ds2.Tables[0].Rows[0]["end_time"].ToString() != "")
+                    else
                     {
-                        end_time.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["end_time"].ToString()).ToShortDateString().ToString();
-                    }
-                    if (ds2.Tables[0].Rows[0]["creation_date"].ToString() != "")
-                    {
-                        creation_date.Value = Convert.ToDateTime(ds2.Tables[0].Rows[0]["creation_date"].ToString()).ToShortDateString().ToString();
+                        Response.Redirect("/platform/basedata_manage_test_version.aspx");
                     }
                 }
             }
@@ -89,7 +91,7 @@ namespace TestPlatform.platform
                 creation_date = Convert.ToDateTime(this.creation_date.Value).ToString();
             }
 
-            string sql = new StringBuilder("update test_version set")
+            string sql = new StringBuilder("update sys_test_name_version set")
                 .Append(" name = @name, start_time = @start_time, end_time = @end_time, creation_date = @creation_date")
                 .Append(" where id = @id").ToString();
 

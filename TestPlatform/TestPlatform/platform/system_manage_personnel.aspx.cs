@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 
@@ -47,6 +45,8 @@ namespace TestPlatform.platform
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            Session["editing_user_id"] = "";
+
             string sql = "delete from users where id = '" + GridView1.DataKeys[e.RowIndex]["用户ID"].ToString() + "'";
             userinfo_enabled.DeleteCommand = sql;
         }

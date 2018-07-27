@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -36,18 +31,6 @@ namespace TestPlatform.platform
                 {
                     Response.Redirect("/platform/test_case.aspx");
                 }
-                // 当前测试系统已经提交
-                //else
-                //{
-                //    string sql0 = new StringBuilder("select is_finish from test_version where").Append(" id = @id").ToString();
-                //    SqlParameter[] parameters0 = { new SqlParameter("@id", Session["current_test_version"]), };
-                //    DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
-                //    string is_finish = ds0.Tables[0].Rows[0]["is_finish"].ToString();
-                //    if ("1" == is_finish)
-                //    {
-                //        Response.Redirect("/platform/test_case.aspx");
-                //    }
-                //}
             }
 
             if (null != Session["editing_test_case_id"] && "" != Session["editing_test_case_id"].ToString())
@@ -55,7 +38,7 @@ namespace TestPlatform.platform
                 if (!IsPostBack)
                 {
                     // 加载测试项目信息
-                    string sql0 = new StringBuilder("select * from test_case where")
+                    string sql0 = new StringBuilder("select * from sys_test_record where")
                     .Append(" id = @id").ToString();
 
                     SqlParameter[] parameters0 = {
@@ -63,21 +46,28 @@ namespace TestPlatform.platform
                 };
 
                     DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
-                    test_case_name.Value = ds0.Tables[0].Rows[0]["name"].ToString();
-                    test_case_precondition.Value = ds0.Tables[0].Rows[0]["precondition"].ToString();
-                    test_case_process.Value = ds0.Tables[0].Rows[0]["process"].ToString();
-                    test_case_suggestion.Value = ds0.Tables[0].Rows[0]["suggestion"].ToString();
-                    test_case_describe.Value = ds0.Tables[0].Rows[0]["describe"].ToString();
-                    test_case_times.Value = ds0.Tables[0].Rows[0]["times"].ToString();
-                    DropDownList_type.SelectedValue = ds0.Tables[0].Rows[0]["type"].ToString();
-                    string pass = ds0.Tables[0].Rows[0]["pass"].ToString();
-                    if ("1" == pass)
+                    if (ds0.Tables[0].Rows.Count > 0)
                     {
-                        test_case_pass.Checked = true;
+                        test_case_name.Value = ds0.Tables[0].Rows[0]["name"].ToString();
+                        test_case_precondition.Value = ds0.Tables[0].Rows[0]["precondition"].ToString();
+                        test_case_process.Value = ds0.Tables[0].Rows[0]["process"].ToString();
+                        test_case_suggestion.Value = ds0.Tables[0].Rows[0]["suggestion"].ToString();
+                        test_case_describe.Value = ds0.Tables[0].Rows[0]["describe"].ToString();
+                        test_case_times.Value = ds0.Tables[0].Rows[0]["times"].ToString();
+                        DropDownList_type.SelectedValue = ds0.Tables[0].Rows[0]["type"].ToString();
+                        string pass = ds0.Tables[0].Rows[0]["pass"].ToString();
+                        if ("1" == pass)
+                        {
+                            test_case_pass.Checked = true;
+                        }
+                        else if ("2" == pass)
+                        {
+                            test_case_pass.Checked = false;
+                        }
                     }
-                    else if ("2" == pass)
+                    else
                     {
-                        test_case_pass.Checked = false;
+                        Response.Redirect("/platform/test_case.aspx");
                     }
                 }
             }
@@ -86,19 +76,13 @@ namespace TestPlatform.platform
                 Response.Redirect("/platform/test_case.aspx");
             }
 
-
             // 获取测试系统名称、版本号
-            string sql = new StringBuilder("select name from test where").Append(" id = @id").ToString();
+            string sql = new StringBuilder("select name from sys_test_name where").Append(" id = @id").ToString();
             SqlParameter[] parameters = { new SqlParameter("@id", Session["current_test_id"]), };
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
             string test_name = ds.Tables[0].Rows[0]["name"].ToString();
             Title_Test_Name.InnerHtml = test_name;
 
-            //string sql2 = new StringBuilder("select name from test_version where").Append(" id = @id").ToString();
-            //SqlParameter[] parameters2 = { new SqlParameter("@id", Session["current_test_version"]), };
-            //DataSet ds2 = sqlHelper.ExecuteSqlDataSet(sql2, parameters2);
-            //string test_version = ds2.Tables[0].Rows[0]["name"].ToString();
-            //Title_Test_version.InnerHtml = test_version;
         }
 
         protected void Button_Save_Click(object sender, EventArgs e)
@@ -120,7 +104,7 @@ namespace TestPlatform.platform
                 pass = "2";
             }
 
-            string sql = new StringBuilder("update test_case set")
+            string sql = new StringBuilder("update sys_test_record set")
                 .Append(" name = @name, precondition = @precondition, process = @process, suggestion = @suggestion, describe = @describe, times = @times, pass = @pass, type = @type")
                 .Append(" where id = @id").ToString();
 

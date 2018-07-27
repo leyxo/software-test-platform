@@ -15,7 +15,7 @@
     
 
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -31,12 +31,7 @@
                     <form id="form1" runat="server">
                         <h4><strong><span id="Title_Department_Name" runat="server">测试项目</span></strong>
                             <span style="float: right">
-                                <table>
-                                    <tr>
-                                        <th>
-                                            <asp:Button ID="Button_Back" class="btn btn-default" runat="server" Text="< 返回" OnClick="Button_Back_Click" />
-                                    </tr>
-                                </table>
+                                <asp:Button ID="Button_Back" class="btn btn-default" runat="server" Text="返回" OnClick="Button_Back_Click" />
                             </span>
                         </h4>
                         <br />
@@ -44,21 +39,16 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     测试系统：<asp:Label ID="label_test" Font-Bold="true" runat="server" Text=""></asp:Label> 
-                                    <%--<asp:DropDownList ID="DropDownList_test" runat="server" DataSourceID="test" DataTextField="name" DataValueField="id" Height="24px" Width="0px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList_test_SelectedIndexChanged" OnDataBound="DropDownList_test_DataBound" Enabled="False"></asp:DropDownList>--%>
                                     &nbsp;&nbsp;版本：<asp:Label ID="label_test_version" Font-Bold="true" runat="server" Text=""></asp:Label>
-                                    <%--<asp:DropDownList ID="DropDownList_test_version" runat="server" DataSourceID="test_version" DataTextField="name" DataValueField="id" Height="24px" Width="0px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList_test_version_SelectedIndexChanged" OnDataBound="DropDownList_test_version_DataBound" Enabled="False"></asp:DropDownList>--%>
-                                    <br />
-                                    <br />
+                                    <br /><br />
                                     起始日期：<asp:Label ID="start_time" Font-Bold="true" runat="server" Text=""></asp:Label>
                                     &nbsp;&nbsp;&nbsp;截止日期：<asp:Label ID="end_time" Font-Bold="true" runat="server" Text=""></asp:Label>
                                     <br />
                                 </div>
                                 <div class="col-md-6">
-                                    测试人员：<asp:Label ID="user" Font-Bold="true" runat="server" Text=""></asp:Label>
-                                    &nbsp;&nbsp;&nbsp;测试状态：<asp:Label ID="status" Font-Bold="true" runat="server" Text=""></asp:Label>
-                                    <br />
-                                    <br />
-                                    提交时间：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
+                                    提交日期：<asp:Label ID="creation_date" Font-Bold="true" runat="server" Text=""></asp:Label>
+                                    <br /><br />
+                                    测试状态：<span id ="test_case_status" runat="server"></span>
                                     <br />
                                 </div>
                             </div>
@@ -73,25 +63,13 @@
                         </span>
                         <br />
 
-                        <%--<asp:SqlDataSource ID="test" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test.id, test.name FROM [test]
-INNER JOIN test_users ON test_users.test_id = test.id AND test_users.user_id = @user_id">
-                            <SelectParameters>
-                                <asp:SessionParameter Name="user_id" SessionField="current_user_id" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                        <asp:SqlDataSource ID="test_version" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [test_version] WHERE ([test_id] = @test_id)">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="DropDownList_test" DefaultValue="0" Name="test_id" PropertyName="SelectedValue" Type="Int32" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>--%>
-
-                        <ul id="myTab" class="nav nav-tabs">
-                            <li class="active"><a href="#test_case" data-toggle="tab">测试项目</a></li>
-                            <li><a href="#test_case_previous" data-toggle="tab">以前版本待解决</a></li>
-                            <li><a href="#test_case_summary" data-toggle="tab">总结</a></li>
+                        <ul id="myTab" class="nav nav-tabs" role="tablist">
+                            <li id="li_test_case" runat="server" class="active"><a href="#tab_test_case" data-toggle="tab">测试项目</a></li>
+                            <li id="li_test_case_previous" runat="server"><a href="#tab_test_case_previous" data-toggle="tab">以前版本待解决</a></li>
+                            <li id="li_test_case_summary" runat="server"><a href="#tab_test_case_summary" data-toggle="tab">总结</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in active" id="test_case">
+                            <div class="tab-pane active" id="tab_test_case" runat="server">
                                 <asp:GridView ID="GridView1" Class="table table-striped table-hover table-bordered table-condensed" Font-Size="Small" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataSourceID="SqlDataSource_test_case" DataKeyNames="ID" OnRowCommand="GridView1_RowCommand" OnRowDeleting="GridView1_RowDeleting">
                                     <Columns>
                                         <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" InsertVisible="False" ReadOnly="True" Visible="False" />
@@ -136,8 +114,16 @@ INNER JOIN test_users ON test_users.test_id = test.id AND test_users.user_id = @
                                     </EmptyDataTemplate>
                                 </asp:GridView>
                             </div>
-                            <%--SQL条件：(版本号 < 当前版本 and (未通过 or 有修改意见))--%>
-                            <div class="tab-pane fade" id="test_case_previous">
+                            <%--SQL条件：(版本号 < 当前版本 and (未通过 or 修改意见=2建议修改))--%>
+                            <div class="tab-pane" id="tab_test_case_previous" runat="server">
+                                <br />
+                                    <div class="input-group" style="float:right; width: 350px;">
+                                        <input id="search_previous" runat="server" type="text" style="width: 300px;" class="form-control" placeholder="搜索范围：测试过程及结果、改进建议"></th>
+                                            <div class="input-group-btn">
+                                                <asp:Button ID="Button_Search_Previous" class="btn btn-default" runat="server" Text="搜索" OnClick="Button_Search_Previous_Click" /></th>
+                                            </div>
+                                    </div>
+                                <br /><br />
                                 <asp:GridView ID="GridView2" Class="table table-striped table-hover table-bordered table-condensed" Font-Size="Small" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataSourceID="SqlDataSource_test_case_previous" DataKeyNames="ID" OnRowCommand="GridView2_RowCommand">
                                     <Columns>
                                         <asp:BoundField DataField="版本" HeaderText="版本" SortExpression="版本" />
@@ -170,7 +156,7 @@ INNER JOIN test_users ON test_users.test_id = test.id AND test_users.user_id = @
                                 <h6>* 包含测试未通过记录和缺陷类型为建议修改的记录</h6>
                             </div>
                             <%--测试总结--%>
-                            <div class="tab-pane fade" id="test_case_summary">
+                            <div class="tab-pane" id="tab_test_case_summary">
                                 <div class="form-group">
                                     <label for="feedback_detail"></label>
                                     <textarea rows="8" runat="server" class="form-control" style="resize: vertical" id="textfield_summary" placeholder="不超过500字" maxlength="1000"></textarea>
@@ -182,13 +168,13 @@ INNER JOIN test_users ON test_users.test_id = test.id AND test_users.user_id = @
                         </div>
 
                         
-                        <asp:SqlDataSource ID="SqlDataSource_test_case" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test_case.id AS ID, test_case.name AS 项目, test_case.precondition AS 前置条件, test_case.process AS 测试过程及结果, test_issue_type.name AS 类型, test_case.times AS 次数, test_case.suggestion AS 改进建议, test_case.describe AS 开发描述, pass.name AS 结论, users.name AS 记录者, test_case.creation_date AS 创建时间 FROM test_case INNER JOIN pass ON pass.id = test_case.pass INNER JOIN users ON users.id = test_case.creation_user_id INNER JOIN test_issue_type ON test_case.type = test_issue_type.id WHERE (test_case.version_id = @version_id)">
+                        <asp:SqlDataSource ID="SqlDataSource_test_case" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT sys_test_record.id AS ID, sys_test_record.name AS 项目, sys_test_record.precondition AS 前置条件, sys_test_record.process AS 测试过程及结果, base_issuetype.name AS 类型, sys_test_record.times AS 次数, sys_test_record.suggestion AS 改进建议, sys_test_record.describe AS 开发描述, base_status_pass.name AS 结论, users.name AS 记录者, sys_test_record.creation_date AS 创建时间 FROM sys_test_record INNER JOIN base_status_pass ON base_status_pass.id = sys_test_record.pass INNER JOIN users ON users.id = sys_test_record.creation_user_id INNER JOIN base_issuetype ON sys_test_record.type = base_issuetype.id WHERE (sys_test_record.version_id = @version_id)">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="version_id" SessionField="current_test_version" Type="Int32" />
                             </SelectParameters>
                         </asp:SqlDataSource>
-                        <%--SQL条件：(版本号 < 当前版本 and (未通过 or 缺陷类型为建议修改))--%>
-                        <asp:SqlDataSource ID="SqlDataSource_test_case_previous" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test_version.name AS 版本, test_case.id AS ID, test_case.name AS 项目, test_case.precondition AS 前置条件, test_case.process AS 测试过程及结果, test_issue_type.name AS 类型, test_case.times AS 次数, test_case.suggestion AS 改进建议, test_case.describe AS 开发描述, pass.name AS 结论, users.name AS 记录者, test_case.creation_date AS 创建时间 FROM test_case INNER JOIN pass ON pass.id = test_case.pass INNER JOIN users ON users.id = test_case.creation_user_id INNER JOIN test_issue_type ON test_case.type = test_issue_type.id INNER JOIN test_version ON test_version.id = test_case.version_id WHERE (test_version.test_ID = @test_id and test_case.version_id < @version_id and (test_case.pass = 2 or test_case.type = 2))">
+                        <%--SQL条件：(版本号 < 当前版本 and (未通过 or 缺陷类型=2建议修改))--%>
+                        <asp:SqlDataSource ID="SqlDataSource_test_case_previous" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT sys_test_name_version.name AS 版本, sys_test_record.id AS ID, sys_test_record.name AS 项目, sys_test_record.precondition AS 前置条件, sys_test_record.process AS 测试过程及结果, base_issuetype.name AS 类型, sys_test_record.times AS 次数, sys_test_record.suggestion AS 改进建议, sys_test_record.describe AS 开发描述, base_status_pass.name AS 结论, users.name AS 记录者, sys_test_record.creation_date AS 创建时间 FROM sys_test_record INNER JOIN base_status_pass ON base_status_pass.id = sys_test_record.pass INNER JOIN users ON users.id = sys_test_record.creation_user_id INNER JOIN base_issuetype ON sys_test_record.type = base_issuetype.id INNER JOIN sys_test_name_version ON sys_test_name_version.id = sys_test_record.version_id WHERE (sys_test_name_version.test_ID = @test_id and sys_test_record.version_id < @version_id and (sys_test_record.pass = 2 or sys_test_record.type = 2))">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="test_id" SessionField="current_test_id" Type="Int32" />
                             </SelectParameters>
@@ -210,5 +196,14 @@ INNER JOIN test_users ON test_users.test_id = test.id AND test_users.user_id = @
         <footer:Footer ID="Footer" runat="server" />
     </div>
 
+    <script>
+        //搜索框内有内容时，显示第二个tab
+        $(function () {
+            var search_content = document.getElementById('search_previous').value;
+            if (search_content != '') {
+                $('#myTab a:eq(1)').tab('show');//显示第2个tab
+            }
+        })
+    </script>
 </body>
 </html>

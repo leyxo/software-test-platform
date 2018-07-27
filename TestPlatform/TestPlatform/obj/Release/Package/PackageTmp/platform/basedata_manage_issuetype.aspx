@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>缺陷类型定义 - 基础数据管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -27,8 +27,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><b id="B1" runat="server">基础数据管理 > 缺陷类型定义</b></div>
                 <div class="panel-body" id="Div1" runat="server">
-
-                    
                     <div>
                         <form id="form1" role="form" runat="server">
                             <h4><strong>缺陷类型</strong>
@@ -39,16 +37,16 @@
                                                 <input id="input_add" runat="server" type="text" style="max-width: 150px;" class="form-control" placeholder="名称" required="required"></th>
                                             <th>&nbsp;</th>
                                             <th>
-                                                <input id="input_point" runat="server" type="text" style="font-weight:normal; max-width: 60px;" class="form-control" placeholder="扣分" required="required" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></th>
+                                                <input id="input_point" runat="server" type="text" style="font-weight: normal; max-width: 60px;" class="form-control" placeholder="扣分" required="required" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></th>
                                             <th>&nbsp;</th>
                                             <th>
-                                                <input id="input_describe" runat="server" type="text" style="font-weight:normal; width: 400px;" class="form-control" placeholder="描述(选填)"></th>
+                                                <input id="input_describe" runat="server" type="text" style="font-weight: normal; width: 400px;" class="form-control" placeholder="描述(选填)"></th>
                                             <th>&nbsp;</th>
                                             <th>
-                                                
+
                                                 <asp:Button ID="Button_Add" class="btn btn-primary" runat="server" Text="添加" OnClick="Button_Add_Click" /></th>
                                         </tr>
-                                        </table>
+                                    </table>
                                 </span>
                             </h4>
                             <br />
@@ -73,15 +71,15 @@
                                     </asp:TemplateField>
                                 </Columns>
                                 <EmptyDataTemplate>
-                                    还没有机构...
+                                    还没有缺陷类型...这种情况是不存在的
                                 </EmptyDataTemplate>
                             </asp:GridView>
-                            <asp:SqlDataSource ID="SqlDataSource_departmemnt" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [test_issue_type] ORDER BY [id]"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource_departmemnt" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_issuetype] ORDER BY [id]"></asp:SqlDataSource>
                         </form>
                         <div id="alert" runat="server" class="alert alert-danger alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <span id="alert_text" runat="server"><strong>已有测试项目正在使用当前类型，不可删除</strong></span>
-                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span id="alert_text" runat="server"><strong>已有测试项目正在使用当前类型，不可删除</strong></span>
+                        </div>
                     </div>
                 </div>
             </div>

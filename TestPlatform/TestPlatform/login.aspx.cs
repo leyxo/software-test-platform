@@ -92,9 +92,9 @@ namespace TestPlatform
         /// </summary>
         public static DataSet IsLogin(string username, string password)
         {
-            string sql = new StringBuilder("select * from users, department, role where")
-                .Append(" users.department = department.id and")
-                .Append(" users.role = role.id and")
+            string sql = new StringBuilder("select * from users, base_department, base_role where")
+                .Append(" users.department = base_department.id and")
+                .Append(" users.role = base_role.id and")
                 .Append(" users.name = @name and")
                 .Append(" users.password = @password").ToString();
 

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -85,10 +80,7 @@ namespace TestPlatform.platform
             else if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
             {
                 // 操作成功
-                alert_text.InnerText = "已注册";
-                alert.Attributes["class"] = "alert alert-success";
                 Response.Redirect("/platform/system_manage_personnel.aspx");
-                //Response.Write("<meta http-equiv='Refresh' content='1; url=login.aspx' /> ");
             }
             else
             {

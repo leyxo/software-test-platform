@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -29,12 +24,12 @@ namespace TestPlatform.platform
             alert.Attributes["class"] = "alert alert-danger";
             alert.Visible = false;
 
-            if ("" != Session["editing_department_id"].ToString())
+            if (null != Session["editing_department_id"] && "" != Session["editing_department_id"].ToString())
             {
                 if (!IsPostBack)
                 {
                     // 加载机构信息
-                    string sql = new StringBuilder("select * from department where")
+                    string sql = new StringBuilder("select * from base_department where")
                     .Append(" id = @id").ToString();
 
                     SqlParameter[] parameters = {
@@ -42,7 +37,14 @@ namespace TestPlatform.platform
                 };
 
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, parameters);
-                    department_name.Value = ds.Tables[0].Rows[0]["name"].ToString();
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        department_name.Value = ds.Tables[0].Rows[0]["name"].ToString();
+                    }
+                    else
+                    {
+                        Response.Redirect("/platform/system_manage_department.aspx");
+                    }
                 }
             }
             else
@@ -56,7 +58,7 @@ namespace TestPlatform.platform
             Department department = new Department();
             department.name = this.department_name.Value;
 
-            string sql = new StringBuilder("update department set")
+            string sql = new StringBuilder("update base_department set")
                 .Append(" name = @name")
                 .Append(" where id = @id").ToString();
 
@@ -69,7 +71,10 @@ namespace TestPlatform.platform
             if (-1 != sqlHelper.ExecuteNonQuery(sql, parameters))
             {
                 // 操作成功
-                Session["current_user_department_name"] = department.name;
+                if (Session["editing_department_id"].ToString() == Session["current_user_department_id"].ToString())
+                {
+                    Session["current_user_department_name"] = department.name;
+                }
                 Response.Redirect("/platform/system_manage_department.aspx");
             }
             else

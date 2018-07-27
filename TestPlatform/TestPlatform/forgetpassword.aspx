@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>登录 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="Content/base.css"/>
 
@@ -18,7 +18,7 @@
         <topbar:TopBar ID="TopBar" runat="server" />
         <div class="panel panel-default">
             <div class="panel-heading"><b>忘记密码</b></div>
-            <div class="panel-body">
+            <div class="panel-body" style="min-height:initial">
                 <form id="form1" method="post" role="form" runat="server">
                     <div class="bs-callout bs-callout-info">
                         <h4><strong>关于重置密码</strong></h4>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-user" id="username_icon" style="position: static"></span>
-                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" aria-describedby="username_icon" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required">
+                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" aria-describedby="username_icon" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required" autofocus="autofocus">
                     </div>
                     <br />
                     <div class="input-group">
@@ -57,15 +57,7 @@
             </div>
         </div>
         
-
         <footer:Footer ID="Footer" runat="server" />
     </div>
-
-    <script type="text/javascript">
-        function aa() {
-            $("#image1").attr('src', '../Widget/Captcha.aspx?' + Math.random());
-        }
-    </script>
-
 </body>
 </html>

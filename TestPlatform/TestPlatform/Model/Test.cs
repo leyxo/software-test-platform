@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TestPlatform
 {
@@ -15,6 +12,8 @@ namespace TestPlatform
         public string descrive;             // 描述
         public int creation_department_id;  // 计划所属机构 (外键)
         public int creation_user_id;        // 项目创建者ID (外键)
-        public DateTime creation_date;      // 项目创建时间
+        public DateTime creation_date;      // 项目提交时间
+        public int available;               // 是否有效
+        public int total_value;             // 总扣分
     }
 }

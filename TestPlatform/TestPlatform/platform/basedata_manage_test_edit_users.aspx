@@ -9,17 +9,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>用户分配 - 测试系统维护 - 基础数据管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     <link rel="stylesheet" href="../Content/bootstrap-datepicker3.css"/>
 
     <script src="../Scripts/jquery-2.2.4.js"></script>
-    <%--<script src="../Scripts/bootstrap.min.js"></script>--%>
     <script src="../Scripts/bootstrap-datepicker.js"></script>
 
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -54,7 +53,7 @@
                                     </Columns>
                                 </asp:GridView>
 
-                                <asp:SqlDataSource ID="users" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT department.name AS department, users.id, users.name, role.name FROM [users] INNER JOIN role ON role.id = users.role INNER JOIN department ON department.id = users.department WHERE users.reg_status = 2">
+                                <asp:SqlDataSource ID="users" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT base_department.name AS department, users.id, users.name, base_role.name FROM [users] INNER JOIN base_role ON base_role.id = users.role INNER JOIN base_department ON base_department.id = users.department WHERE users.reg_status = 2">
                                     <SelectParameters>
                                         <asp:SessionParameter Name="department" SessionField="current_user_department_id" />
                                     </SelectParameters>

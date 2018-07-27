@@ -12,17 +12,11 @@
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
     <link rel="stylesheet" href="Content/base.css" />
 
-    <%--Bootstrap Table--%>
-    <script src="Content/bootstrap-table/bootstrap-table.js"></script>
-    <link href="Content/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
-    <script src="Content/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
-
 </head>
-<body>
+<body style="background-color:#FFFFFF;">
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
-
 
         <div class="jumbotron">
             <h1>感谢使用!</h1>
@@ -30,11 +24,6 @@
             <p><a class="btn btn-primary btn-lg" href="login.aspx" role="button">重新登录</a></p>
         </div>
         <br />
-
-        <form id="form1" runat="server">
-
-        </form>
-
 
         <%--Footer--%>
         <footer:Footer ID="Footer" runat="server" />

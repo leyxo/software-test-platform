@@ -14,13 +14,8 @@
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
     <link rel="stylesheet" href="Content/base.css" />
 
-    <%--Bootstrap Table--%>
-    <script src="Content/bootstrap-table/bootstrap-table.js"></script>
-    <link href="Content/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
-    <script src="Content/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
-
 </head>
-<body>
+<body style="background-color:#FFFFFF;">
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -30,7 +25,7 @@
             <p>欢迎使用软件测试平台</p>
             <p>
                 <a class="btn btn-primary btn-lg" href="login.aspx" role="button">马上登录</a> &nbsp;
-                <%--<a class="btn btn-default btn-lg" href="help.aspx" role="button">使用帮助</a>--%>
+                <a class="btn btn-default btn-lg" href="help.aspx" role="button">使用帮助</a>
             </p>
         </div>
         <br />

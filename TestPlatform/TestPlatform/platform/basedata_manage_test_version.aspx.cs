@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
@@ -33,8 +29,12 @@ namespace TestPlatform.platform
             }
             if (!authHelper.hasAuthority(Convert.ToInt32(Session["current_user_role_id"]), "/platform/basedata_manage_test_version_edit.aspx"))
             {
-                GridView1.Columns[6].Visible = false;
-                GridView1.Columns[7].Visible = false;
+                GridView1.Columns[8].Visible = false;
+                GridView1.Columns[9].Visible = false;
+            }
+            if (!authHelper.hasAuthority(Convert.ToInt32(Session["current_user_role_id"]), "/platform/test_case.aspx"))
+            {
+                GridView1.Columns[10].Visible = false;
             }
 
             alert.Visible = false;
@@ -43,8 +43,8 @@ namespace TestPlatform.platform
             {
                 // 第一次加载时，初始化Session["current_basedata_test_id"]
                 // 获取第一个项目id
-                string sql = new StringBuilder("select test.id from test")
-                    .Append(" INNER JOIN test_users ON test_users.test_id = test.id WHERE test_users.user_id = @user_id and available = 1").ToString();
+                string sql = new StringBuilder("select sys_test_name.id from sys_test_name")
+                    .Append(" INNER JOIN sys_test_name_grant_users ON sys_test_name_grant_users.test_id = sys_test_name.id WHERE sys_test_name_grant_users.user_id = @user_id and available = 1").ToString();
                 SqlParameter[] parameters = {
                     new SqlParameter("@user_id", Session["current_user_id"]),
                 };
@@ -80,10 +80,10 @@ namespace TestPlatform.platform
         /// <param name="e"></param>
         protected void DropDownList_test_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 初始化 Session["current_test_version"]
+            // 初始化 Session["current_basedata_test_version"]
             Session["current_basedata_test_id"] = DropDownList_test.SelectedValue;
             // 获取第一个版本id
-            string sql = new StringBuilder("select id from test_version where")
+            string sql = new StringBuilder("select id from sys_test_name_version where")
                 .Append(" test_id = @test_id").ToString();
             SqlParameter[] parameters = {
                     new SqlParameter("@test_id", Session["current_basedata_test_id"]),
@@ -128,7 +128,7 @@ namespace TestPlatform.platform
                 // 初始化 Session["current_test_version"]
                 Session["current_test_version"] = e.CommandArgument.ToString();
                 // 获取第一个版本id
-                string sql = new StringBuilder("select test_id from test_version where")
+                string sql = new StringBuilder("select test_id from sys_test_name_version where")
                     .Append(" id = @id").ToString();
                 SqlParameter[] parameters = {
                     new SqlParameter("@id", Session["current_test_version"]),
@@ -151,7 +151,9 @@ namespace TestPlatform.platform
         {
             Session["current_test_version"] = "";
             Session["current_basedata_test_version"] = "";
-            string sql = "delete from test_version where id = '" + GridView1.DataKeys[e.RowIndex]["id"].ToString() + "'";
+            Session["editing_test_version_id"] = "";
+
+            string sql = "delete from sys_test_name_version where id = '" + GridView1.DataKeys[e.RowIndex]["id"].ToString() + "'";
             SqlDataSource_test_version.DeleteCommand = sql;
         }
     }

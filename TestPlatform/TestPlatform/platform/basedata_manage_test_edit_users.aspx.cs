@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
@@ -34,14 +30,14 @@ namespace TestPlatform.platform
                 if (!IsPostBack)
                 {
                     // 获取测试系统名称
-                    string sql0 = new StringBuilder("select name from test where").Append(" id = @id").ToString();
+                    string sql0 = new StringBuilder("select name from sys_test_name where").Append(" id = @id").ToString();
                     SqlParameter[] parameters0 = { new SqlParameter("@id", Session["editing_test_id"]), };
                     DataSet ds0 = sqlHelper.ExecuteSqlDataSet(sql0, parameters0);
                     string test_name = ds0.Tables[0].Rows[0]["name"].ToString();
                     Title_Test_Name.InnerHtml = test_name;
 
                     // 加载用户分配表信息
-                    string sql = "select * from test_users where test_id = '" + Session["editing_test_id"].ToString() + "'";
+                    string sql = "select * from sys_test_name_grant_users where test_id = '" + Session["editing_test_id"].ToString() + "'";
                     DataSet ds = sqlHelper.ExecuteSqlDataSet(sql, null);
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
@@ -68,10 +64,9 @@ namespace TestPlatform.platform
         protected void Button_Save_Click(object sender, EventArgs e)
         {
             // 先删除所有当前测试系统项
-            string sql_clearAll = "delete from test_users where test_id = '" + Session["editing_test_id"].ToString() + "'";
+            string sql_clearAll = "delete from sys_test_name_grant_users where test_id = '" + Session["editing_test_id"].ToString() + "'";
             sqlHelper.ExecuteNonQuery(sql_clearAll, null);
 
-            // 置Session["current_test_id"]，Session["current_test_version"]为空
             Session["current_test_id"] = "";
             Session["current_test_version"] = "";
             Session["current_basedata_test_id"] = "";
@@ -79,7 +74,7 @@ namespace TestPlatform.platform
 
             // 如果分配了至少一个用户，写入新的用户分配项
             bool flag = false;
-            StringBuilder stringBuilder = new StringBuilder("insert into test_users (test_id, user_id) values");
+            StringBuilder stringBuilder = new StringBuilder("insert into sys_test_name_grant_users (test_id, user_id) values");
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
                 CheckBox checkBox = (CheckBox)GridView1.Rows[i].FindControl("CheckBox1");

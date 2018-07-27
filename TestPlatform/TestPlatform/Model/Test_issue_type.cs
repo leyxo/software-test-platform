@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TestPlatform
+﻿namespace TestPlatform
 {
     /// <summary>
-    /// 错误记录类型表
+    /// 缺陷记录类型表
     /// </summary>
     public class Test_issue_type
     {
-        public int id;
-        public string name;
-        public string describe;
+        public int id;              // 缺陷ID
+        public string name;         // 缺陷名称
+        public string describe;     // 缺陷记录说明
     }
 }

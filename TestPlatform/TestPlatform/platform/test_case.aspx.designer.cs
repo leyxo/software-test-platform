@@ -112,24 +112,6 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.Label end_time;
         
         /// <summary>
-        /// user 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label user;
-        
-        /// <summary>
-        /// status 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label status;
-        
-        /// <summary>
         /// creation_date 控件。
         /// </summary>
         /// <remarks>
@@ -137,6 +119,15 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label creation_date;
+        
+        /// <summary>
+        /// test_case_status 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl test_case_status;
         
         /// <summary>
         /// Button_Submit 控件。
@@ -175,6 +166,42 @@ namespace TestPlatform.platform {
         protected global::System.Web.UI.WebControls.Button Button_Add_Case;
         
         /// <summary>
+        /// li_test_case 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_test_case;
+        
+        /// <summary>
+        /// li_test_case_previous 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_test_case_previous;
+        
+        /// <summary>
+        /// li_test_case_summary 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_test_case_summary;
+        
+        /// <summary>
+        /// tab_test_case 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_test_case;
+        
+        /// <summary>
         /// GridView1 控件。
         /// </summary>
         /// <remarks>
@@ -182,6 +209,33 @@ namespace TestPlatform.platform {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
+        
+        /// <summary>
+        /// tab_test_case_previous 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_test_case_previous;
+        
+        /// <summary>
+        /// search_previous 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText search_previous;
+        
+        /// <summary>
+        /// Button_Search_Previous 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_Search_Previous;
         
         /// <summary>
         /// GridView2 控件。

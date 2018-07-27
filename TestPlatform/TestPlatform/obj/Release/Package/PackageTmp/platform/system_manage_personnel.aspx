@@ -15,7 +15,7 @@
     
 
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -52,7 +52,7 @@
                                 没有待审核人员
                             </EmptyDataTemplate>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="users_under_review" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT users.id AS 用户ID, users.name AS 姓名, users.email AS 邮箱, users.phone AS 电话, users.reg_datetime AS 注册时间, department.name AS 注册机构, role.name AS 注册角色 FROM users INNER JOIN department ON department.id = users.department INNER JOIN role ON role.id = users.role INNER JOIN reg_status ON reg_status.id = users.reg_status
+                        <asp:SqlDataSource ID="users_under_review" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT users.id AS 用户ID, users.name AS 姓名, users.email AS 邮箱, users.phone AS 电话, users.reg_datetime AS 注册时间, base_department.name AS 注册机构, base_role.name AS 注册角色 FROM users INNER JOIN base_department ON base_department.id = users.department INNER JOIN base_role ON base_role.id = users.role INNER JOIN base_status_reg ON base_status_reg.id = users.reg_status
 WHERE users.reg_status = 1"></asp:SqlDataSource>
 
                         <h4><strong>所有人员</strong>
@@ -87,7 +87,7 @@ WHERE users.reg_status = 1"></asp:SqlDataSource>
                                             <EditItemTemplate>
                                                 <asp:DropDownList ID="DropDownList_role" runat="server" DataSourceID="role" DataTextField="name" DataValueField="id">
                                                 </asp:DropDownList>
-                                                <asp:SqlDataSource ID="role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [role]"></asp:SqlDataSource>
+                                                <asp:SqlDataSource ID="role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_role]"></asp:SqlDataSource>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("角色") %>'></asp:Label>
@@ -142,7 +142,7 @@ WHERE users.reg_status = 1"></asp:SqlDataSource>
                                             <EditItemTemplate>
                                                 <asp:DropDownList ID="DropDownList_role" runat="server" DataSourceID="role" DataTextField="name" DataValueField="id">
                                                 </asp:DropDownList>
-                                                <asp:SqlDataSource ID="role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [role]"></asp:SqlDataSource>
+                                                <asp:SqlDataSource ID="role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_role]"></asp:SqlDataSource>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("角色") %>'></asp:Label>
@@ -177,10 +177,10 @@ WHERE users.reg_status = 1"></asp:SqlDataSource>
                                 </asp:GridView>
                             </div>
                         </div>
-                        <asp:SqlDataSource ID="userinfo_enabled" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT users.id AS 用户ID, users.name AS 姓名, users.email AS 邮箱, users.phone AS 电话, users.reg_datetime AS 注册时间, department.name AS 机构, role.name AS 角色, reg_status.name AS 状态 FROM users INNER JOIN department ON department.id = users.department INNER JOIN role ON role.id = users.role INNER JOIN reg_status ON reg_status.id = users.reg_status WHERE users.reg_status IN (1, 2) "></asp:SqlDataSource>
-                        <asp:SqlDataSource ID="userinfo_disabled" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT users.id AS 用户ID, users.name AS 姓名, users.email AS 邮箱, users.phone AS 电话, users.reg_datetime AS 注册时间, department.name AS 机构, role.name AS 角色, reg_status.name AS 状态 FROM users INNER JOIN department ON department.id = users.department INNER JOIN role ON role.id = users.role INNER JOIN reg_status ON reg_status.id = users.reg_status WHERE users.reg_status NOT IN (1, 2) "></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="userinfo_enabled" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT users.id AS 用户ID, users.name AS 姓名, users.email AS 邮箱, users.phone AS 电话, users.reg_datetime AS 注册时间, base_department.name AS 机构, base_role.name AS 角色, base_status_reg.name AS 状态 FROM users INNER JOIN base_department ON base_department.id = users.department INNER JOIN base_role ON base_role.id = users.role INNER JOIN base_status_reg ON base_status_reg.id = users.reg_status WHERE users.reg_status IN (1, 2) "></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="userinfo_disabled" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT users.id AS 用户ID, users.name AS 姓名, users.email AS 邮箱, users.phone AS 电话, users.reg_datetime AS 注册时间, base_department.name AS 机构, base_role.name AS 角色, base_status_reg.name AS 状态 FROM users INNER JOIN base_department ON base_department.id = users.department INNER JOIN base_role ON base_role.id = users.role INNER JOIN base_status_reg ON base_status_reg.id = users.reg_status WHERE users.reg_status NOT IN (1, 2) "></asp:SqlDataSource>
 
-                        <asp:SqlDataSource ID="department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [department]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_department]"></asp:SqlDataSource>
                         <asp:SqlDataSource ID="users" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" DeleteCommand="DELETE FROM [users] WHERE [id] = @id" InsertCommand="INSERT INTO [users] ([name], [email], [phone], [reg_datetime], [department], [role], [reg_status]) VALUES (@name, @email, @phone, @reg_datetime, @department, @role, @reg_status)" SelectCommand="SELECT [id], [name], [email], [phone], [reg_datetime], [department], [role], [reg_status] FROM [users]" UpdateCommand="UPDATE [users] SET [name] = @name, [email] = @email, [phone] = @phone, [reg_datetime] = @reg_datetime, [department] = @department, [role] = @role, [reg_status] = @reg_status WHERE [id] = @id">
                             <DeleteParameters>
                                 <asp:Parameter Name="id" Type="Int32" />
@@ -206,7 +206,7 @@ WHERE users.reg_status = 1"></asp:SqlDataSource>
                             </UpdateParameters>
                         </asp:SqlDataSource>
 
-                        <asp:SqlDataSource ID="reg_status" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="select * from reg_status"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="reg_status" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="select * from base_status_reg"></asp:SqlDataSource>
 
                     </form>
                     <div id="alert" runat="server" class="alert alert-danger alert-dismissible" role="alert">

@@ -10,10 +10,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>新用户注册 - 软件测试平台</title>
 
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="Content/base.css"/>
-    <%--Script--%>
+    <%--js--%>
     <script src="../Scripts/jquery-2.2.4.js"></script>
     <%--<script src="../Scripts/bootstrap.min.js"></script>--%>
     
@@ -24,11 +24,11 @@
 
         <div class="panel panel-default">
             <div class="panel-heading"><b>新用户注册</b></div>
-            <div class="panel-body">
+            <div class="panel-body" style="min-height:initial">
                 <form id="form1" method="post" role="form" runat="server">
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-user" id="username_icon" style="position: static"></span>
-                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required" maxlength="16" />
+                        <input type="text" runat="server" class="form-control" id="username" placeholder="用户名" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="required" maxlength="16" autofocus="autofocus" />
                     </div>
                     <br />
                     <div class="input-group">
@@ -54,13 +54,13 @@
                     <div class="input-group">
                         <span class="input-group-addon" style="position: static">机构</span>
                         <asp:DropDownList ID="DropDownList_department" runat="server" DataSourceID="SqlDataSource_register_department" DataTextField="name" DataValueField="id" Height="34px" Width="128px"></asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSource_register_department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [department]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource_register_department" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_department]"></asp:SqlDataSource>
                     </div>
                     <br />
                     <div class="input-group">
                         <span class="input-group-addon" style="position: static">角色</span>
                         <asp:DropDownList ID="DropDownList_role" runat="server" DataSourceID="SqlDataSource_register_role" DataTextField="name" DataValueField="id" Height="34px" Width="128px"></asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSource_register_role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [role]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource_register_role" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT * FROM [base_role]"></asp:SqlDataSource>
                     </div>
                     <br />
                     <div id="alert" runat="server" class="alert alert-danger alert-dismissible" role="alert">

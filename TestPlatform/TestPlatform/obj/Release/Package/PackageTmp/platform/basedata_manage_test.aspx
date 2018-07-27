@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>测试系统维护 - 基础数据管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -49,8 +49,8 @@
                                 <asp:BoundField DataField="简介" HeaderText="简介" SortExpression="简介" />
                                 <asp:BoundField DataField="项目创建日期" HeaderText="项目创建日期" SortExpression="项目创建日期" DataFormatString="{0:d}" />
                                 <asp:BoundField DataField="创建者" HeaderText="创建者" SortExpression="创建者" />
-                                <asp:BoundField DataField="状态" HeaderText="状态" SortExpression="状态" />
                                 <asp:BoundField DataField="扣分" HeaderText="扣分" SortExpression="扣分" />
+                                <asp:BoundField DataField="状态" HeaderText="状态" SortExpression="状态" />
                                 <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>
                                         <asp:LinkButton runat="server" Text="删除" CommandName="Delete" CausesValidation="False" ID="LinkButton1" OnClientClick="javascript:return confirm('确定删除此测试系统？');"></asp:LinkButton>
@@ -76,7 +76,7 @@
                                 还没有项目？开始一个<a href="basedata_manage_test_add.aspx">新项目</a>
                             </EmptyDataTemplate>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="test_all" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT test.id AS ID, test.name AS 项目名称, users.name AS 创建者, test.describe AS 简介, test.creation_date AS 项目创建日期, replace(replace(available, '0', '无效'), '1', '有效') AS 状态, test.total_value AS 扣分 FROM test INNER JOIN users ON users.id = test.creation_user_id AND test.creation_user_id = users.id">
+                        <asp:SqlDataSource ID="test_all" runat="server" ConnectionString="<%$ ConnectionStrings:webConnectionString %>" SelectCommand="SELECT sys_test_name.id AS ID, sys_test_name.name AS 项目名称, users.name AS 创建者, sys_test_name.describe AS 简介, sys_test_name.creation_date AS 项目创建日期, replace(replace(available, '0', '无效'), '1', '有效') AS 状态, sys_test_name.total_value AS 扣分 FROM sys_test_name INNER JOIN users ON users.id = sys_test_name.creation_user_id AND sys_test_name.creation_user_id = users.id">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="current_user_department_id" SessionField="current_user_department_id" />
                             </SelectParameters>

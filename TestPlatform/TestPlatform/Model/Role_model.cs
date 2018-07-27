@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TestPlatform.Model
+﻿namespace TestPlatform.Model
 {
     /// <summary>
     /// 权限分配表

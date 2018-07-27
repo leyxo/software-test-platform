@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.Widget
 {
@@ -64,9 +59,7 @@ namespace TestPlatform.Widget
                     int findex = random.Next(5);
 
                     Font drawFont = new Font(f[findex], 16, (System.Drawing.FontStyle.Bold));
-
-
-
+                    
                     SolidBrush drawBrush = new SolidBrush(c[cindex]);
 
                     float x = 5.0F;
@@ -89,7 +82,6 @@ namespace TestPlatform.Widget
                 {
                     int x = random.Next(image.Width);
                     int y = random.Next(image.Height);
-
                     image.SetPixel(x, y, Color.FromArgb(random.Next()));
                 }
 

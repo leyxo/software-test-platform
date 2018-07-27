@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
 {
@@ -25,8 +20,7 @@ namespace TestPlatform.platform
             {
                 Response.Redirect("/platform/basedata_manage_issuetype.aspx");
             }
-
-            alert.Attributes["class"] = "alert alert-danger";
+            
             alert.Visible = false;
 
             if ("" != Session["editing_issuetype_id"].ToString())
@@ -34,7 +28,7 @@ namespace TestPlatform.platform
                 if (!IsPostBack)
                 {
                     // 加载用户信息
-                    string sql = new StringBuilder("select * from test_issue_type where")
+                    string sql = new StringBuilder("select * from base_issuetype where")
                     .Append(" id = @id").ToString();
 
                     SqlParameter[] parameters = {
@@ -59,7 +53,7 @@ namespace TestPlatform.platform
             string describe = issue_describe.Value;
             string point = issue_point.Value;
 
-            string sql = new StringBuilder("update test_issue_type set")
+            string sql = new StringBuilder("update base_issuetype set")
                 .Append(" name = @name,")
                 .Append(" describe = @describe,")
                 .Append(" point = @point")
@@ -80,6 +74,7 @@ namespace TestPlatform.platform
             }
             else
             {
+                alert.Attributes["class"] = "alert alert-danger";
                 alert_text.InnerText = "操作失败";
                 alert.Visible = true;
             }

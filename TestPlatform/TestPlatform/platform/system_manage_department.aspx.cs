@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TestPlatform.platform
@@ -43,7 +39,7 @@ namespace TestPlatform.platform
             Department department = new Department();
             department.name = this.input_add_department.Value;
 
-            string sql = new StringBuilder("insert into department")
+            string sql = new StringBuilder("insert into base_department")
                 .Append(" (name)")
                 .Append(" values (@name)").ToString();
 
@@ -65,7 +61,7 @@ namespace TestPlatform.platform
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            string sql = "delete from department where id = 0";
+            string sql = "delete from base_department where id = 0";
 
             // 如果当前机构没有人则可以删除
             string sql0 = new StringBuilder("select * from users where")
@@ -74,7 +70,9 @@ namespace TestPlatform.platform
             DataSet ds = sqlHelper.ExecuteSqlDataSet(sql0, parameters);
             if (ds.Tables[0].Rows.Count == 0)
             {
-                sql = "delete from department where id = '" + GridView1.DataKeys[e.RowIndex]["id"].ToString() + "'";
+                // 删除
+                Session["editing_department_id"] = "";
+                sql = "delete from base_department where id = '" + GridView1.DataKeys[e.RowIndex]["id"].ToString() + "'";
             }
             else
             {

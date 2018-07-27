@@ -9,12 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>意见反馈 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -33,7 +33,7 @@
                     <form id="form1" method="post" role="form" runat="server">
                         <div class="form-group">
                             <label for="feedback_title">反馈意见</label>
-                            <input type="text" runat="server" class="form-control" id="feedback_title" placeholder="有啥问题，别憋着" required="required" />
+                            <input type="text" runat="server" class="form-control" id="feedback_title" placeholder="有啥问题，别憋着" required="required" autofocus="autofocus" />
                         </div>
                         <div class="form-group">
                             <label for="feedback_detail">详细说明</label>

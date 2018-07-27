@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TestPlatform
+﻿namespace TestPlatform
 {
     /// <summary>
     /// 菜单模块表

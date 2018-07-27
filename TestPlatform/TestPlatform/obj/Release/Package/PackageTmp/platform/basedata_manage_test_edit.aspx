@@ -9,17 +9,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>项目编辑 - 系统名称维护 - 基础数据管理 - 软件测试平台</title>
     
-    <%--Style Sheet--%>
+    <%--css--%>
     <link rel="stylesheet" href="../Content/bootstrap.min.css"/>
     <link rel="stylesheet" href="../Content/base.css"/>
     <link rel="stylesheet" href="../Content/bootstrap-datepicker3.css"/>
 
     <script src="../Scripts/jquery-2.2.4.js"></script>
-    <%--<script src="../Scripts/bootstrap.min.js"></script>--%>
     <script src="../Scripts/bootstrap-datepicker.js"></script>
 
 </head>
-<body style="background-color: #fefefe;">
+<body>
     <div class="container" runat="server">
         <%--TopBar--%>
         <topbar:TopBar ID="TopBar" runat="server" />
@@ -52,7 +51,7 @@
                                 <div class="checkbox">
                                     <label>
                                         <input id="test_available" runat="server" type="checkbox" value="">
-                                        是否有效
+                                        有效
                                     </label>
                                 </div>
                             </div>
